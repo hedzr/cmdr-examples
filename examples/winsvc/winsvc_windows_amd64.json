@@ -1,0 +1,18 @@
+{
+    "Name": "hz-winsvc",
+    "DisplayName": "HZ winsvc",
+    "Description": "Run the Go Builder",
+
+    "Dir": "C:\\tmp.dev\\go\\src",
+    "Exec": "C:\\windows\\system32\\cmd.exe",
+    "Args": ["/C","C:\\tmp.dev\\go\\src\\build_all.bat"],
+    "Env": [
+        "PATH=C:\\usr\\bin;C:\\Program Files (x86)\\Git\\cmd",
+        "GOROOT_BOOTSTRAP=C:\\tmp\\go_ready",
+        "HOMEDRIVE=C:",
+        "HOMEPATH=\\Documents and Settings\\Administrator"
+    ],
+
+    "Stderr": "C:\\tmp\\builder_err.log",
+    "Stdout": "C:\\tmp\\builder_out.log"
+}
