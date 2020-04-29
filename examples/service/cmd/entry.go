@@ -8,7 +8,7 @@ import (
 	"github.com/hedzr/cmdr-examples/examples/service/dex"
 	"github.com/hedzr/cmdr-examples/examples/service/svr"
 	"github.com/sirupsen/logrus"
-	"gopkg.in/hedzr/errors.v2"
+	"runtime"
 	"strings"
 )
 
@@ -24,19 +24,21 @@ func Entry() {
 	// }()
 
 	if err := cmdr.Exec(buildRootCmd(),
-
 		// To disable internal commands and flags, uncomment the following codes
 		// cmdr.WithBuiltinCommands(false, false, false, false, false),
-		dex.WithDaemon(svr.NewDaemon(), nil, nil, nil),
+		
+		dex.WithDaemon(svr.NewDaemon(), modifier, nil, nil),
+		// server.WithCmdrDaemonSupport(),
+		// server.WithCmdrHook(),
 
 		// integrate with logex library
 		cmdr.WithLogex(cmdr.DebugLevel),
 		cmdr.WithLogexPrefix("logger"),
 
-		cmdr.WithHelpTabStop(41),
+		cmdr.WithHelpTabStop(51),
 
 		cmdr.WithWatchMainConfigFileToo(true),
-		cmdr.WithNoWatchConfigFiles(false),
+		// cmdr.WithNoWatchConfigFiles(false),
 		cmdr.WithOptionMergeModifying(func(keyPath string, value, oldVal interface{}) {
 			logrus.Debugf("%%-> -> %q: %v -> %v", keyPath, oldVal, value)
 			if strings.HasSuffix(keyPath, ".mqtt.server.stats.enabled") {
@@ -46,6 +48,12 @@ func Entry() {
 				// mqttlib.FindServer().EnableSysStatsLog(!vxconf.ToBool(value))
 			}
 		}),
+		cmdr.WithOptionModifying(func(keyPath string, value, oldVal interface{}) {
+			logrus.Infof("%%-> -> %q: %v -> %v", keyPath, oldVal, value)
+		}),
+
+		// sample.WithSampleCmdrOption(),
+		// trace.WithTraceEnable(true),
 
 		cmdr.WithUnknownOptionHandler(onUnknownOptionHandler),
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
@@ -76,18 +84,26 @@ func onPassThruCharHit(parsed *cmdr.Command, switchChar string, args []string) (
 	return // ErrShouldBeStopException
 }
 
+func onUnknownOptionHandler(isFlag bool, title string, cmd *cmdr.Command, args []string) (fallbackToDefaultDetector bool) {
+	return true
+}
+
 func onUnhandledErrorHandler(err interface{}) {
 	// debug.PrintStack()
 	// pprof.Lookup("goroutine").WriteTo(os.Stdout, 1)
-	dumpStacks()
+	if e, ok := err.(error); ok {
+		logrus.Errorf("%+v", e)
+	} else {
+		logrus.Errorf("%+v", err)
+		dumpStacks()
+	}
 }
 
 func dumpStacks() {
-	fmt.Printf("=== BEGIN goroutine stack dump ===\n%s\n=== END goroutine stack dump ===\n", errors.DumpStacksAsString(true))
-}
-
-func onUnknownOptionHandler(isFlag bool, title string, cmd *cmdr.Command, args []string) (fallbackToDefaultDetector bool) {
-	return true
+	buf := make([]byte, 16384)
+	buf = buf[:runtime.Stack(buf, false)]
+	fmt.Printf("=== BEGIN goroutine stack dump ===\n%s\n=== END goroutine stack dump ===\n", buf)
+	// fmt.Printf("=== BEGIN goroutine stack dump ===\n%s\n=== END goroutine stack dump ===\n", errors.DumpStacksAsString(true))
 }
 
 var optAddTraceOption, optAddServerExtOption cmdr.ExecOption

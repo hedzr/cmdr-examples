@@ -5,6 +5,7 @@
 package dex
 
 import (
+	"github.com/hedzr/cmdr"
 	"github.com/kardianos/service"
 	"net"
 	"os"
@@ -22,7 +23,7 @@ type Daemon interface {
 	OnUninstall(prog *Program) (err error)
 
 	// OnReadConfigFromCommandLine(root *cmdr.RootCommand)
-	OnPrepare(prog *Program) (err error)
+	OnPrepare(prog *Program, root *cmdr.RootCommand) (err error)
 }
 
 // HotReloadable enables hot-restart/hot-reload feature

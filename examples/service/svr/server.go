@@ -6,9 +6,12 @@ package svr
 
 import (
 	"fmt"
+	"github.com/hedzr/cmdr"
 	"github.com/hedzr/cmdr-examples/examples/service/dex"
 	"github.com/kardianos/service"
+	"golang.org/x/crypto/acme/autocert"
 	"net"
+	"net/http"
 	"os"
 	"os/exec"
 	"runtime"
@@ -28,6 +31,7 @@ func NewDaemonWithConfig(config *service.Config) dex.Daemon {
 	d := &daemonImpl{
 		// exit:   make(chan struct{}),
 		config: config,
+		Type:   typeIris,
 	}
 	return d
 }
@@ -38,21 +42,34 @@ type daemonImpl struct {
 	// logger  service.Logger
 	// cmd     *exec.Cmd
 	// exit    chan struct{}
+
+	appTag      string
+	certManager *autocert.Manager
+	Type        muxType
+	mux         *http.ServeMux
+	routerImpl  routerMux
+	// router      *gin.Engine
+	// irisApp     *iris.Application
 }
 
 func (d *daemonImpl) Config() (config *service.Config) {
 	return d.config
 }
 
-func (d *daemonImpl) OnPrepare(prog *dex.Program) (err error) {
-	return
-}
-
 func (d *daemonImpl) OnRun(prog *dex.Program, stopCh, doneCh chan struct{}, listener net.Listener) (err error) {
-	prog.Logger.Infof("demo daemon OnRun, pid = %v, ppid = %v", os.Getpid(), os.Getppid())
+	serverType := cmdr.GetStringR("server.start.Server-Type")
+
+	prog.Logger.Infof("demo daemon OnRun (Server-Type = %q), pid = %v, ppid = %v", serverType, os.Getpid(), os.Getppid())
+
+	if serverType == "h2-server" {
+		err = d.onRunHttp2Server(prog, stopCh, doneCh, listener)
+		if err == nil {
+			err = d.enterLoop(prog, stopCh, doneCh, listener)
+		}
+		return
+	}
 
 	worker(prog, stopCh, doneCh)
-
 	return
 }
 

@@ -4,6 +4,7 @@ package dex
 
 import (
 	"github.com/hedzr/cmdr"
+	"github.com/hedzr/cmdr-examples/examples/service/svr/sig"
 	"github.com/kardianos/service"
 	"os"
 )
@@ -19,8 +20,9 @@ type Program struct {
 	Args            []string
 	Env             []string
 	InvokedInDaemon bool
-	exit            chan struct{}
-	err             error
+	// exit            chan struct{}
+	// done            chan struct{}
+	err error
 	// Command     *exec.Cmd
 }
 
@@ -54,10 +56,12 @@ func (p *Program) runIt(cmd *cmdr.Command, args []string) {
 
 	if p.InvokedInDaemon {
 		// go func() {
-		p.err = pd.daemon.OnRun(p, pd.exit, nil, nil)
+		stop, done := sig.GetChs()
+		p.err = pd.daemon.OnRun(p, stop, done, nil)
 		// }()
 	} else {
-		p.err = pd.daemon.OnRun(p, pd.exit, nil, nil)
+		stop, done := sig.GetChs()
+		p.err = pd.daemon.OnRun(p, stop, done, nil)
 	}
 	return
 }
@@ -70,7 +74,9 @@ func (p *Program) Stop(s service.Service) (err error) {
 	// Stop should not block. Return with a few seconds.
 	// <-time.After(time.Second * 13)
 
-	close(p.exit)
+	stop, done := sig.GetChs()
+	close(stop)
+	
 	// logger.Info("Stopping ", p.DisplayName)
 	// if p.Command.ProcessState.Exited() == false {
 	// 	err = p.Command.Process.Kill()
@@ -78,5 +84,6 @@ func (p *Program) Stop(s service.Service) (err error) {
 	if service.Interactive() {
 		os.Exit(0)
 	}
+	close(done)
 	return
 }

@@ -32,7 +32,8 @@ func WithDaemon(daemonImplObject Daemon,
 		Service: nil,
 		Logger:  nil,
 		Command: nil,
-		exit:    make(chan struct{}),
+		// exit:    make(chan struct{}),
+		// done:    make(chan struct{}),
 	}
 
 	pd.Config = daemonImplObject.Config()
@@ -148,7 +149,7 @@ func prepare(daemonImplObject Daemon, root *cmdr.RootCommand) (err error) {
 
 	// pd.daemon.OnReadConfigFromCommandLine(root)
 
-	if err = pd.daemon.OnPrepare(pd); err != nil {
+	if err = pd.daemon.OnPrepare(pd, root); err != nil {
 		return
 	}
 
