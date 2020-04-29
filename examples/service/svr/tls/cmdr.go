@@ -10,6 +10,7 @@ import (
 	"gopkg.in/hedzr/errors.v2"
 	"io/ioutil"
 	"net"
+	"os"
 	"path"
 )
 
@@ -129,6 +130,7 @@ func (s *CmdrTLSConfig) InitTLSConfigFromConfigFile(appTag, prefix string) {
 		s.Key = cmdr.GetStringRP(prefix, "key")
 
 		for _, loc := range cmdr.GetStringSliceRP(prefix, "locations") {
+			logrus.Debugf("> tls - testing loc: %v", loc)
 			if s.Cacert != "" && cmdr.FileExists(path.Join(loc, s.Cacert)) {
 				s.Cacert = path.Join(loc, s.Cacert)
 			} else if s.Cacert != "" {
@@ -156,6 +158,9 @@ func (s *CmdrTLSConfig) InitTLSConfigFromConfigFile(appTag, prefix string) {
 		default:
 			s.MinTLSVersion = tls.VersionTLS12
 		}
+
+		logrus.Debugf("> cfg_dir: %v / %v", path.Dir(cmdr.GetUsedConfigFile()), os.Getenv("CFG_DIR"))
+		logrus.Debugf("> tls matched: %+v", s)
 	}
 }
 
@@ -192,7 +197,7 @@ func (s *CmdrTLSConfig) newTLSConfig() (config *tls.Config, err error) {
 	var cert tls.Certificate
 	cert, err = tls.LoadX509KeyPair(s.Cert, s.Key)
 	if err != nil {
-		err = errors.New("error parsing X509 certificate/key pair").Attach(err)
+		err = errors.New("error parsing X509 certificate/key pair, pwd=%q, cert=%q", cmdr.GetCurrentDir(), s.Cert).Attach(err)
 		return
 	}
 	cert.Leaf, err = x509.ParseCertificate(cert.Certificate[0])

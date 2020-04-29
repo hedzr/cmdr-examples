@@ -170,7 +170,7 @@ func daemonStart(cmd *cmdr.Command, args []string) (err error) {
 	pd.Command, pd.Args = cmd, args
 	pd.InvokedInDaemon = cmdr.GetBoolRP("server.start", "in-daemon")
 	foreground := cmdr.GetBoolRP("server.start", "foreground")
-	pd.Logger.Infof("daemonStart: foreground: %v, in-daemon: %v", foreground, pd.InvokedInDaemon)
+	pd.Logger.Infof("daemonStart: foreground: %v, in-daemon: %v, hit: %v", foreground, pd.InvokedInDaemon, cmd.GetHitStr())
 	// ctx := impl.GetContext(Command, Args, daemonImpl, onHotReloading)
 	if foreground || cmd.GetHitStr() == "run" {
 		err = run(cmd, args)
@@ -178,7 +178,7 @@ func daemonStart(cmd *cmdr.Command, args []string) (err error) {
 		err = runAsDaemon(cmd, args)
 	}
 	pd.Logger.Infof("daemonStart END: err: %v", err)
-	if pd.InvokedInDaemon {
+	if pd.InvokedInDaemon || runtime.GOOS == "windows" {
 		err = pd.Service.Run()
 	}
 	return

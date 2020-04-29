@@ -28,12 +28,12 @@ func (d *daemonImpl) OnPrepare(prog *dex.Program, root *cmdr.RootCommand) (err e
 	// Server-Type radio group
 
 	ox := cmdr.NewCmdFrom(serverStartCmd)
-	cmdr.NewBool(false).
+	cmdr.NewBool(true).
 		Titles("h2", "h2-server", "h2").
 		Description("start as a HTTP/2 server", "").
 		ToggleGroup("Server-Type").
 		AttachTo(ox)
-	cmdr.NewBool(true).
+	cmdr.NewBool(false).
 		Titles("lp", "cmdexec-loop").
 		Description("start a worker and loop for cmd exec", "").
 		ToggleGroup("Server-Type").
