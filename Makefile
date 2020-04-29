@@ -46,7 +46,7 @@ SERVER_STOP_ARG=server stop
 
 
 
-MAIN_APPS = fluent winsvc
+MAIN_APPS = fluent winsvc service
 
 
  

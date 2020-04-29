@@ -132,7 +132,7 @@ func (p *programSimple) Stop(s service.Service) error {
 	return nil
 }
 
-// Config is the runner app config structure.
+// config is the runner app config structure.
 type Config struct {
 	Name, DisplayName, Description string
 
