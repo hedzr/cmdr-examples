@@ -109,7 +109,7 @@ func (s *CmdrTLSConfig) InitTLSConfigFromCommandline(prefix string) {
 //
 // The entries in config file looks like:
 //
-//     prefix := "cmdr-http2.server.tls"
+//     prefix := "my-service.server.tls"
 //     tls:
 //       enabled: true
 //       cacert: root.pem

@@ -64,7 +64,7 @@ func Entry() {
 		cmdr.WithOnSwitchCharHit(onSwitchCharHit),
 		cmdr.WithOnPassThruCharHit(onPassThruCharHit),
 	); err != nil {
-		logrus.Fatalf("error: %v", err)
+		logrus.Fatalf("error: %+v", err)
 	}
 }
 

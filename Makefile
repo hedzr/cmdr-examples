@@ -128,7 +128,7 @@ build-win:
 	    echo "     Building $(GOBIN)/$(an)_$(os)_$(goarch)...$(os)"; \
 	    GOARCH="$(goarch)" GOOS="$(os)" \
 	    GOPATH="$(GOPATH)" GOBIN="$(GOBIN)" GO111MODULE="$(GO111MODULE)" GOPROXY="$(GOPROXY)" \
-	        go build -ldflags "$(LDFLAGS) -X '$(W_PKG).AppName=$(an)'" -o $(GOBIN)/$(an)_$(os)_$(goarch).exe $(GOBASE)/examples/$(an); \
+	        go build -ldflags "$(LDFLAGS)" -o $(GOBIN)/$(an)_$(os)_$(goarch).exe $(GOBASE)/examples/$(an); \
 	    chmod +x $(GOBIN)/$(an)_$(os)_$(goarch)*; \
 	    ls -la $(LS_OPT) $(GOBIN)/$(an)_$(os)_$(goarch)*; \
 	  ) \
@@ -145,15 +145,16 @@ build-linux:
 	    echo "     Building $(GOBIN)/$(an)_$(os)_$(goarch)...$(os)"; \
 	    GOARCH="$(goarch)" GOOS="$(os)" \
 	    GOPATH="$(GOPATH)" GOBIN="$(GOBIN)" GO111MODULE="$(GO111MODULE)" GOPROXY="$(GOPROXY)" \
-	        go build -ldflags "$(LDFLAGS) -X '$(W_PKG).AppName=$(an)'" -o $(GOBIN)/$(an)_$(os)_$(goarch) $(GOBASE)/examples/$(an); \
+	        go build -ldflags "$(LDFLAGS)" -o $(GOBIN)/$(an)_$(os)_$(goarch) $(GOBASE)/examples/$(an); \
 	    chmod +x $(GOBIN)/$(an)_$(os)_$(goarch)*; \
 	    ls -la $(LS_OPT) $(GOBIN)/$(an)_$(os)_$(goarch)*; \
 	  ) \
 	)
 	#@ls -la $(LS_OPT) $(GOBIN)/*linux*
 
-## build-nacl: build to linux executable, for LAN deploy manually.
+## build-nacl: build to nacl executable, for LAN deploy manually.
 build-nacl:
+	# NOTE: can't build to nacl with golang 1.14 and darwin
 	@echo "  >  Building linux binary..."
 	@echo "  >  LDFLAGS = $(LDFLAGS)"
 	# unsupported GOOS/GOARCH pair nacl/386 ??
@@ -164,7 +165,48 @@ build-nacl:
 	    echo "     >> Building $(GOBIN)/$(an)_$(os)_$(goarch)...$(os)" >/dev/null; \
 	    GOARCH="$(goarch)" GOOS="$(os)" \
 	    GOPATH="$(GOPATH)" GOBIN="$(GOBIN)" GO111MODULE="$(GO111MODULE)" GOPROXY="$(GOPROXY)" \
-	      go build -ldflags "$(LDFLAGS) -X '$(W_PKG).AppName=$(an)'" -o $(GOBIN)/$(an)_$(os)_$(goarch) $(GOBASE)/examples/$(an); \
+	      go build -ldflags "$(LDFLAGS)" -o $(GOBIN)/$(an)_$(os)_$(goarch) $(GOBASE)/examples/$(an); \
+	    chmod +x $(GOBIN)/$(an)_$(os)_$(goarch)*; \
+	    ls -la $(LS_OPT) $(GOBIN)/$(an)_$(os)_$(goarch)*; \
+	) \
+	) \
+	)
+	#  @ls -la $(LS_OPT) $(GOBIN)/*linux*
+	#  -X '$(W_PKG).AppName=$(an)'
+
+## build-plan9: build to plan9 executable, for LAN deploy manually.
+build-plan9:
+	@echo "  >  Building linux binary..."
+	@echo "  >  LDFLAGS = $(LDFLAGS)"
+	# unsupported GOOS/GOARCH pair nacl/386 ??
+	$(foreach an, $(MAIN_APPS), \
+	  echo "  >  APP NAMEs = appname:$(APPNAME)|projname:$(PROJECTNAME)|an:$(an)"; \
+	  $(foreach os, plan9, \
+	  $(foreach goarch, amd64, \
+	    echo "     >> Building $(GOBIN)/$(an)_$(os)_$(goarch)...$(os)" >/dev/null; \
+	    GOARCH="$(goarch)" GOOS="$(os)" \
+	    GOPATH="$(GOPATH)" GOBIN="$(GOBIN)" GO111MODULE="$(GO111MODULE)" GOPROXY="$(GOPROXY)" \
+	      go build -ldflags "$(LDFLAGS)" -o $(GOBIN)/$(an)_$(os)_$(goarch) $(GOBASE)/examples/$(an); \
+	    chmod +x $(GOBIN)/$(an)_$(os)_$(goarch)*; \
+	    ls -la $(LS_OPT) $(GOBIN)/$(an)_$(os)_$(goarch)*; \
+	) \
+	) \
+	)
+	#@ls -la $(LS_OPT) $(GOBIN)/*linux*
+
+## build-freebsd: build to freebsd executable, for LAN deploy manually.
+build-freebsd:
+	@echo "  >  Building linux binary..."
+	@echo "  >  LDFLAGS = $(LDFLAGS)"
+	# unsupported GOOS/GOARCH pair nacl/386 ??
+	$(foreach an, $(MAIN_APPS), \
+	  echo "  >  APP NAMEs = appname:$(APPNAME)|projname:$(PROJECTNAME)|an:$(an)"; \
+	  $(foreach os, freebsd, \
+	  $(foreach goarch, amd64, \
+	    echo "     >> Building $(GOBIN)/$(an)_$(os)_$(goarch)...$(os)" >/dev/null; \
+	    GOARCH="$(goarch)" GOOS="$(os)" \
+	    GOPATH="$(GOPATH)" GOBIN="$(GOBIN)" GO111MODULE="$(GO111MODULE)" GOPROXY="$(GOPROXY)" \
+	      go build -ldflags "$(LDFLAGS)" -o $(GOBIN)/$(an)_$(os)_$(goarch) $(GOBASE)/examples/$(an); \
 	    chmod +x $(GOBIN)/$(an)_$(os)_$(goarch)*; \
 	    ls -la $(LS_OPT) $(GOBIN)/$(an)_$(os)_$(goarch)*; \
 	) \
@@ -183,7 +225,7 @@ build-ci:
 	    echo "     >> Building $(GOBIN)/$(an)_$(os)_$(goarch)...$(os)" >/dev/null; \
 	    GOARCH="$(goarch)" GOOS="$(os)" \
 	    GOPATH="$(GOPATH)" GOBIN="$(GOBIN)" GO111MODULE="$(GO111MODULE)" GOPROXY="$(GOPROXY)" \
-	      go build -ldflags "$(LDFLAGS) -X '$(W_PKG).AppName=$(an)'" -o $(GOBIN)/$(an)_$(os)_$(goarch) $(GOBASE)/examples/$(an); \
+	      go build -ldflags "$(LDFLAGS)" -o $(GOBIN)/$(an)_$(os)_$(goarch) $(GOBASE)/examples/$(an); \
 	    chmod +x $(GOBIN)/$(an)_$(os)_$(goarch); \
 	    ls -la $(LS_OPT) $(GOBIN)/$(an)_$(os)_$(goarch); \
 	    gzip -f $(GOBIN)/$(an)_$(os)_$(goarch); \

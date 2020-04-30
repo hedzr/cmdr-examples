@@ -8,6 +8,8 @@ replace github.com/hedzr/cmdr => ../cmdr
 
 replace github.com/hedzr/cmdr-addons => ../cmdr-addons
 
+replace github.com/kardianos/service => ../../kardianos/service
+
 require (
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect

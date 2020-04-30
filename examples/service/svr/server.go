@@ -82,21 +82,6 @@ func worker(prog *dex.Program, stopCh, doneCh chan struct{}) {
 	var args []string = []string{"--version"}
 	var env []string
 
-	f1, err := os.OpenFile("/tmp/1.err", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0777)
-	if err != nil {
-		prog.Logger.Warningf("Failed to open std err %q: %v", f1, err)
-		return
-	}
-	defer f1.Close()
-
-	f2, err2 := os.OpenFile("/tmp/1.out", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0777)
-	if err2 != nil {
-		// logger.Warningf("Failed to open std out %q: %v", p.Stdout, err)
-		prog.Logger.Errorf("Failed to open std out %q: %v\n", f2, err)
-		return
-	}
-	defer f2.Close()
-
 	ticker := time.NewTicker(5 * time.Second)
 	defer func() {
 		ticker.Stop()
@@ -113,14 +98,13 @@ LOOP:
 			break LOOP
 		case tc := <-ticker.C:
 			cmd := exec.Command(fullExec, args...)
-			cmd.Dir = "/tmp"
+			cmd.Dir = prog.WorkDirName()
 			cmd.Env = append(os.Environ(), env...)
-			cmd.Stdout = f2
-			cmd.Stderr = f1
+			cmd.Stdout, cmd.Stderr = prog.GetLogFileHandlers()
 
 			pwd, _ := os.Getwd()
 			prog.Logger.Infof("demo running at %d [dir: %q], inDaemon: %v, tick: %v, OS=%v\n", os.Getpid(), pwd, prog.InvokedInDaemon, tc, runtime.GOOS)
-			err = cmd.Run()
+			_ = cmd.Run()
 			cmd.Wait()
 			if !prog.InvokedInDaemon {
 				return
