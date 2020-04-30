@@ -6,14 +6,13 @@ package dex
 
 import (
 	"github.com/hedzr/cmdr"
-	"github.com/kardianos/service"
 	"net"
 	"os"
 )
 
 // Daemon interface should be implemented when you are using `daemon.Enable()`.
 type Daemon interface {
-	Config() (config *service.Config)
+	// Config() (config *service.Config)
 	
 	OnRun(prog *Program, stopCh, doneCh chan struct{}, listener net.Listener) (err error)
 	OnStop(prog *Program) (err error)

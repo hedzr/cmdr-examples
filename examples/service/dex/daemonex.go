@@ -8,6 +8,8 @@ import (
 	"github.com/kardianos/service"
 	"github.com/sirupsen/logrus"
 	"log"
+	"os"
+	"path"
 	"runtime"
 )
 
@@ -36,13 +38,29 @@ func WithDaemon(daemonImplObject Daemon,
 		// done:    make(chan struct{}),
 	}
 
-	pd.Config = daemonImplObject.Config()
-	if len(pd.Config.Arguments) == 0 {
-		pd.Config.Arguments = []string{
-			"server", "run", "--in-daemon",
-		}
+	if dio, ok := daemonImplObject.(interface{ Config() *service.Config }); ok {
+		pd.Config = dio.Config()
 	}
 
+	// set appname with daemon name
+	os.Setenv("APPNAME", pd.Config.Name)
+	// logrus.Printf("set appname with daemon name: %q", pd.Config.Name)
+
+	if len(pd.Config.Arguments) == 0 {
+		pd.Config.Arguments = []string{"server", "run", "--in-daemon"}
+	}
+	if pd.Config.Option == nil {
+		pd.Config.Option = make(service.KeyValue)
+	}
+	if len(pd.Config.WorkingDirectory) == 0 {
+		workDir := path.Join("var", "lib", pd.Config.Name)
+		if cmdr.FileExists(workDir) {
+			pd.Config.WorkingDirectory = workDir
+		} else {
+			pd.Config.WorkingDirectory = cmdr.GetExecutableDir()
+		}
+	}
+	
 	for _, opt := range opts {
 		opt()
 	}
@@ -61,10 +79,6 @@ func WithDaemon(daemonImplObject Daemon,
 
 			attachPreAction(root, preAction)
 			attachPostAction(root, postAction)
-
-			if err := prepare(daemonImplObject, root); err != nil {
-				logrus.Fatal(err)
-			}
 
 		})
 	}
@@ -93,7 +107,7 @@ func attachPostAction(root *cmdr.RootCommand, postAction func(cmd *cmdr.Command,
 			if postAction != nil {
 				postAction(cmd, args)
 			}
-			pidfile.Destroy()
+			// pidfile.Destroy()
 			savedPostAction(cmd, args)
 			return
 		}
@@ -102,7 +116,7 @@ func attachPostAction(root *cmdr.RootCommand, postAction func(cmd *cmdr.Command,
 			if postAction != nil {
 				postAction(cmd, args)
 			}
-			pidfile.Destroy()
+			// pidfile.Destroy()
 			return
 		}
 	}
@@ -112,8 +126,13 @@ func attachPreAction(root *cmdr.RootCommand, preAction func(cmd *cmdr.Command, a
 	if root.PreAction != nil {
 		savedPreAction := root.PreAction
 		root.PreAction = func(cmd *cmdr.Command, args []string) (err error) {
-			pidfile.Create(cmd)
+			// pidfile.Create(cmd)
 			logger.Setup(cmd)
+
+			if err := prepare(pd.daemon, root); err != nil {
+				logrus.Fatal(err)
+			}
+
 			if err = savedPreAction(cmd, args); err != nil {
 				return
 			}
@@ -124,8 +143,13 @@ func attachPreAction(root *cmdr.RootCommand, preAction func(cmd *cmdr.Command, a
 		}
 	} else {
 		root.PreAction = func(cmd *cmdr.Command, args []string) (err error) {
-			pidfile.Create(cmd)
+			// pidfile.Create(cmd)
 			logger.Setup(cmd)
+
+			if err := prepare(pd.daemon, root); err != nil {
+				logrus.Fatal(err)
+			}
+
 			if preAction != nil {
 				err = preAction(cmd, args)
 			}
@@ -134,7 +158,56 @@ func attachPreAction(root *cmdr.RootCommand, preAction func(cmd *cmdr.Command, a
 	}
 }
 
-func prepare(daemonImplObject Daemon, root *cmdr.RootCommand) (err error) {
+const systemdScript = `[Unit]
+Description={{.Description}}
+ConditionFileIsExecutable={{.Path|cmdEscape}}
+{{range $i, $dep := .Dependencies}} 
+{{$dep}} {{end}}
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart={{.Path|cmdEscape}}{{range .Arguments}} {{.|cmd}}{{end}}
+{{if .ChRoot}}RootDirectory={{.ChRoot|cmd}}{{end}}
+{{if .WorkingDirectory}}WorkingDirectory={{.WorkingDirectory|cmdEscape}}{{end}}
+{{if .UserName}}User={{.UserName}}{{end}}
+{{if .ReloadSignal}}ExecReload=/bin/kill -{{.ReloadSignal}} "$MAINPID"{{end}}
+{{if .PIDFile}}PIDFile={{.PIDFile|cmd}}{{end}}
+{{if and .LogOutput .HasOutputFileSupport -}}
+StandardOutput=file:/var/log/{{.Name}}/{{.Name}}.out
+StandardError=file:/var/log/{{.Name}}/{{.Name}}.err
+{{- end}}
+{{if .Restart}}Restart={{.Restart}}{{end}}
+{{if .SuccessExitStatus}}SuccessExitStatus={{.SuccessExitStatus}}{{end}}
+RestartSec=120
+EnvironmentFile=-{{.EnvFileName}}
+
+[Install]
+WantedBy=multi-user.target
+`
+
+func prepare(daemonImplObject Daemon, cmd *cmdr.RootCommand) (err error) {
+
+	// set appname with daemon name
+	os.Setenv("APPNAME", pd.Config.Name)
+	logrus.Printf("set appname with daemon name: %q", pd.Config.Name)
+
+	err = pd.PrepareAppDirs()
+
+	if runtime.GOOS != "windows" {
+		pd.Config.Option["PIDFile"] = pd.PidFileName()
+
+		logDir := path.Dir(pd.LogStdoutFileName()) // "/var/log" // path.Join("/var", "log") // , conf.AppName)
+		if cmdr.FileExists(logDir) {
+			// logFile := path.Join(logDir, conf.AppName, ".out")
+			// errFile := path.Join(logDir, conf.AppName, ".err")
+			pd.Config.Option["LogOutput"] = true
+		}
+
+		pd.Config.Option["envFilename"] = pd.EnvFileName()
+
+		pd.Config.Option["SystemdScript"] = systemdScript
+	}
 
 	pd.Service, err = service.New(pd, pd.Config)
 	if err != nil {
@@ -149,7 +222,7 @@ func prepare(daemonImplObject Daemon, root *cmdr.RootCommand) (err error) {
 
 	// pd.daemon.OnReadConfigFromCommandLine(root)
 
-	if err = pd.daemon.OnPrepare(pd, root); err != nil {
+	if err = pd.daemon.OnPrepare(pd, cmd); err != nil {
 		return
 	}
 
@@ -169,10 +242,18 @@ func prepare(daemonImplObject Daemon, root *cmdr.RootCommand) (err error) {
 func daemonStart(cmd *cmdr.Command, args []string) (err error) {
 	pd.Command, pd.Args = cmd, args
 	pd.InvokedInDaemon = cmdr.GetBoolRP("server.start", "in-daemon")
+	hotReloading := cmdr.GetBoolRP("server.start", "in-hot-reload")
 	foreground := cmdr.GetBoolRP("server.start", "foreground")
-	pd.Logger.Infof("daemonStart: foreground: %v, in-daemon: %v, hit: %v", foreground, pd.InvokedInDaemon, cmd.GetHitStr())
+	pd.Logger.Infof("daemonStart: foreground: %v, in-daemon: %v, hot-reload: %v, hit: %v", foreground, pd.InvokedInDaemon, hotReloading, cmd.GetHitStr())
+
 	// ctx := impl.GetContext(Command, Args, daemonImpl, onHotReloading)
+	if hotReloading {
+		err = daemonHotReload(cmd, args)
+		return
+	}
+
 	if foreground || cmd.GetHitStr() == "run" {
+		pd.InvokedDirectly = true
 		err = run(cmd, args)
 	} else {
 		err = runAsDaemon(cmd, args)
@@ -183,13 +264,6 @@ func daemonStart(cmd *cmdr.Command, args []string) (err error) {
 	}
 	return
 }
-
-// func onHotReloading(ctx *impl.Context) (err error) {
-// 	// if hr, ok := ctx.DaemonImpl.(HotReloadable); ok {
-// 	// 	err = hr.OnHotReload(ctx)
-// 	// }
-// 	return
-// }
 
 func runAsDaemon(cmd *cmdr.Command, args []string) (err error) {
 	err = service.Control(pd.Service, "start")
@@ -205,7 +279,7 @@ func run(cmd *cmdr.Command, args []string) (err error) {
 		pd.run()
 		err = pd.err
 	}
-	
+
 	// defer func() {
 	// 	if service.Interactive() {
 	// 		err = pd.Stop(pd.service)
@@ -251,10 +325,18 @@ func daemonRestart(cmd *cmdr.Command, args []string) (err error) {
 	return
 }
 
-func daemonHotRestart(cmd *cmdr.Command, args []string) (err error) {
+func daemonHotReload(cmd *cmdr.Command, args []string) (err error) {
 	pd.Command, pd.Args = cmd, args
 	// ctx := impl.GetContext(Command, Args, daemonImpl, onHotReloading)
 	// impl.HotReload(Command.GetRoot().AppName, ctx)
+
+	return
+}
+
+func onHotReloading() (err error) {
+	if hr, ok := pd.Service.(HotReloadable); ok {
+		err = hr.OnHotReload(pd)
+	}
 	return
 }
 

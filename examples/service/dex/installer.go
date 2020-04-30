@@ -14,7 +14,7 @@ import (
 )
 
 func runInstaller(cmd *cmdr.Command, args []string) (err error) {
-	if !isRoot() {
+	if !isRootUser() {
 		log.Fatal("This Program must be run as root! (sudo)")
 	}
 
@@ -58,7 +58,7 @@ func runInstaller(cmd *cmdr.Command, args []string) (err error) {
 }
 
 func runUninstaller(cmd *cmdr.Command, args []string) (err error) {
-	if !isRoot() {
+	if !isRootUser() {
 		log.Fatal("This Program must be run as root! (sudo)")
 	}
 

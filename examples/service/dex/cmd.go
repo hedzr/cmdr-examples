@@ -52,11 +52,11 @@ $ {{.AppName}} reload
 $ {{.AppName}} hot-reload
 					send signal to make Program restart itself without broken any connections.
 $ {{.AppName}} status
-					display the daemonized Program running status.
-$ {{.AppName}} install [--systemd]
-					install Program as a systemd service.
+					display the demonized Program running status.
+$ {{.AppName}} install
+					install Program as a daemon service (win, macOS, linux systemd/upstart/init).
 $ {{.AppName}} uninstall
-					remove the installed systemd service.
+					remove the installed daemon service.
 `,
 				},
 				Flags: []*cmdr.Flag{
@@ -65,16 +65,17 @@ $ {{.AppName}} uninstall
 							Short:       "f",
 							Full:        "foreground",
 							Aliases:     []string{"fg"},
-							Description: "run on foreground, NOT daemonized.",
+							Description: "run on foreground, instead of demonized.",
 						},
 						DefaultValue: false,
 					},
 					{
 						BaseOpt: cmdr.BaseOpt{
 							Short:       "hr",
-							Full:        "hot-restart",
-							Aliases:     []string{"hot-reload"},
-							Description: "hot reload mode.",
+							Full:        "in-hot-reload",
+							Aliases:     []string{"hot-restart"},
+							Description: "app is been running in hot reload mode.",
+							Hidden:      true,
 						},
 						DefaultValue: false,
 					},
@@ -82,7 +83,7 @@ $ {{.AppName}} uninstall
 						BaseOpt: cmdr.BaseOpt{
 							Short:       "",
 							Full:        "in-daemon",
-							Description: "under daemon mode.",
+							Description: "app is been running in daemon mode (special for windows service).",
 							Hidden:      true,
 						},
 						DefaultValue: false,
@@ -152,9 +153,9 @@ $ {{.AppName}} uninstall
 			{
 				BaseOpt: cmdr.BaseOpt{
 					Short:       "hr",
-					Full:        "hot-restart",
-					Aliases:     []string{"hot-reload", "live-reload"},
-					Description: "hot-restart this system service/daemon.",
+					Full:        "hot-reload",
+					Aliases:     []string{"hot-restart", "live-reload"},
+					Description: "hot-reload this system service/daemon.",
 					LongDescription: `hot-restart/hot-reload/live-reload: 
 
 This action will start a new child process and transfer all 
@@ -162,7 +163,7 @@ living connections to the child, and shutdown itself
 gracefully.
 With this action, the service will keep serving without broken.
 `,
-					Action: daemonHotRestart,
+					Action: daemonHotReload,
 				},
 			},
 			{
