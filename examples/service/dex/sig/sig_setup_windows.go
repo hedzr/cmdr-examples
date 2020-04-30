@@ -1,7 +1,5 @@
 // Copyright © 2019 Hedzr Yeh.
 
-// +build nacl plan9
-
 package sig
 
 import (
@@ -72,32 +70,49 @@ func makeHandlers() (signals []os.Signal) {
 }
 
 func nilSigSend(process *os.Process) error {
-	// return process.Signal(syscall.Signal(0))
 	return nil
+	// return process.Signal(syscall.Signal(0))
 }
 
 func sigSendHUP(process *os.Process) error {
-	// return process.Signal(syscall.SIGHUP)
 	return nil
+	// return process.Signal(syscall.SIGHUP)
 }
 
 func sigSendUSR1(process *os.Process) error {
 	return nil
+	// return process.Signal(syscall.Signal(0x1e))
 }
 
 func sigSendUSR2(process *os.Process) error {
 	return nil
+	// return process.Signal(syscall.Signal(0x1f))
 }
 
 func sigSendTERM(process *os.Process) error {
-	// return process.Signal(syscall.SIGTERM)
 	return nil
+	// return process.Signal(syscall.SIGTERM)
 }
 
 func sigSendQUIT(process *os.Process) error {
-	return nil // process.Signal(syscall.SIGQUIT)
+	return nil
+	// return process.Signal(syscall.SIGQUIT)
 }
 
 func sigSendKILL(process *os.Process) error {
-	return nil // process.Signal(syscall.SIGKILL)
+	return nil
+	// return process.Signal(syscall.SIGKILL)
 }
+
+// QuitSignal return a channel for quit signal raising up.
+func QuitSignal() chan os.Signal {
+	// Wait for interrupt signal to gracefully shutdown the server with
+	// a timeout of 10 seconds.
+	quit := make(chan os.Signal)
+	return quit
+}
+
+// // StopSelf will terminate the app gracefully
+// func StopSelf() {
+// 	//
+// }

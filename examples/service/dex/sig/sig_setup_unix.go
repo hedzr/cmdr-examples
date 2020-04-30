@@ -9,6 +9,7 @@ package sig
 import (
 	"log"
 	"os"
+	"os/signal"
 	"syscall"
 )
 
@@ -107,3 +108,27 @@ func sigSendQUIT(process *os.Process) error {
 func sigSendKILL(process *os.Process) error {
 	return process.Signal(syscall.SIGKILL)
 }
+
+var quitSignal chan os.Signal
+
+// QuitSignal return a channel for quit signal raising up.
+func QuitSignal() chan os.Signal {
+	// return []os.Signal{
+	// 	syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGABRT, syscall.SIGINT,
+	// }
+	if quitSignal == nil {
+		// Wait for interrupt signal to gracefully shutdown the server with
+		// a timeout of 10 seconds.
+		quitSignal = make(chan os.Signal)
+		signal.Notify(quitSignal, // os.Interrupt, os.Kill, syscall.SIGHUP,
+			syscall.SIGQUIT, syscall.SIGTERM,
+			// syscall.SIGUSR1, syscall.SIGUSR2, syscall.SIGTSTP
+			syscall.SIGABRT, syscall.SIGINT)
+	}
+	return quitSignal
+}
+
+// // StopSelf will terminate the app gracefully
+// func StopSelf() {
+// 	child.Signal(syscall.SIGTERM)
+// }
