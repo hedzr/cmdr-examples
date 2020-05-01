@@ -187,7 +187,7 @@ func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan str
 		if config.IsServerCertValid() || srv.TLSConfig.GetCertificate == nil {
 			logrus.Printf("Serving on https://0.0.0.0:%d with HTTPS...", port)
 			// if cmdr.FileExists("ci/certs/server.cert") && cmdr.FileExists("ci/certs/server.key") {
-			if err = d.serve(srv, listener, config.Cert, config.Key); err != http.ErrServerClosed {
+			if err = d.serve(srv, listener, config.Cert, config.Key); err != http.ErrServerClosed && err != nil {
 				if dex.IsErrorAddressAlreadyInUse(err) {
 					if present, process := dex.FindDaemonProcess(); present {
 						logrus.Fatalf("bind to port :%v failed, it's already in use (by: pid=%v).", port, process.Pid)
@@ -210,7 +210,7 @@ func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan str
 			// 		}
 		} else {
 			logrus.Printf("Serving on https://0.0.0.0:%d with HTTP...", port)
-			if err = d.serve(srv, listener, "", ""); err != http.ErrServerClosed {
+			if err = d.serve(srv, listener, "", ""); err != http.ErrServerClosed && err != nil {
 				logrus.Fatal(err)
 			}
 			logrus.Println("end")
