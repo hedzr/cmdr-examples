@@ -4,12 +4,12 @@ package svr
 
 import (
 	"github.com/hedzr/cmdr"
-	"github.com/hedzr/cmdr-examples/examples/service/dex"
+	"github.com/hedzr/cmdr-addons/pkg/plugins/dex"
 	"github.com/hedzr/cmdr-examples/examples/service/svr/tls"
 	"time"
 )
 
-func (d *daemonImpl) OnPrepare(prog *dex.Program, root *cmdr.RootCommand) (err error) {
+func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (err error) {
 	serverCmd := root.FindSubCommand("server")
 	serverStartCmd := serverCmd.FindSubCommand("start")
 
@@ -100,6 +100,13 @@ func (d *daemonImpl) OnPrepare(prog *dex.Program, root *cmdr.RootCommand) (err e
 			// runClient()
 			return
 		})
+	return
+}
 
+func (d *daemonImpl) BeforeServiceStart(prog *dex.Program, root *cmdr.Command) (err error) {
+	return
+}
+
+func (d *daemonImpl) AfterServiceStop(prog *dex.Program, root *cmdr.Command) (err error) {
 	return
 }

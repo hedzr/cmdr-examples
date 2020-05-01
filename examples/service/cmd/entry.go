@@ -5,7 +5,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/hedzr/cmdr"
-	"github.com/hedzr/cmdr-examples/examples/service/dex"
+	"github.com/hedzr/cmdr-addons/pkg/plugins/dex"
 	"github.com/hedzr/cmdr-examples/examples/service/svr"
 	"github.com/sirupsen/logrus"
 	"runtime"

@@ -7,7 +7,7 @@ package svr
 import (
 	"fmt"
 	"github.com/hedzr/cmdr"
-	"github.com/hedzr/cmdr-examples/examples/service/dex"
+	"github.com/hedzr/cmdr-addons/pkg/plugins/dex"
 	"github.com/kardianos/service"
 	"golang.org/x/crypto/acme/autocert"
 	"net"
