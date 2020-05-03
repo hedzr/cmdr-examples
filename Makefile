@@ -409,7 +409,16 @@ bench:
 	# go test -bench "." -run=none -test.benchtime 10s
 	# todo: go install golang.org/x/perf/cmd/benchstat
 
-
+## linux-test: call ci/linux_test/Makefile
+linux-test:
+	@echo "  >  linux-test ..."
+	@-touch $(STDERR)
+	@-rm $(STDERR)
+	@echo $(MAKE) -f ./ci/linux_test/Makefile test 2> $(STDERR)
+	@$(MAKE) -f ./ci/linux_test/Makefile test 2> $(STDERR)
+	@echo "  >  linux-test ..."
+	$(MAKE) -f ./ci/linux_test/Makefile all  2> $(STDERR)
+	@cat $(STDERR) | sed -e '1s/.*/\nError:\n/' 1>&2
 
 ## rshz: rsync to my TP470P
 rshz:
