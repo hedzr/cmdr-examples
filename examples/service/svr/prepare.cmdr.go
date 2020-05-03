@@ -85,6 +85,11 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 		ToggleGroup("Mux").
 		AttachTo(opt)
 	cmdr.NewBool(false).
+		Titles("echo", "echo").
+		Description("use Echo engine", "").
+		ToggleGroup("Mux").
+		AttachTo(opt)
+	cmdr.NewBool(false).
 		Titles("std", "std").
 		Description("use stdlib http.ServerMux engine", "").
 		ToggleGroup("Mux").

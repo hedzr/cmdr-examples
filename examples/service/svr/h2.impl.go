@@ -141,6 +141,8 @@ func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan str
 	switch serverType {
 	case "iris":
 		d.Type = typeIris
+	case "echo":
+		d.Type = typeEcho
 	case "gin":
 		d.Type = typeGin
 	case "gorilla":
@@ -152,6 +154,8 @@ func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan str
 	switch d.Type {
 	case typeIris:
 		d.routerImpl = newIris()
+	case typeEcho:
+		d.routerImpl = newEcho()
 	case typeGin:
 		d.routerImpl = newGin()
 	case typeGorilla:

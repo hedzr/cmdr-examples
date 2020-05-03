@@ -73,8 +73,12 @@ func (d *irisImpl) Serve(srv *http.Server, listener net.Listener, certFile, keyF
 	// 	return err
 	// }), iris.WithoutServerError(iris.ErrServerClosed))
 
-	h2listener = tls.NewListener(listener, srv.TLSConfig)
-	return d.irisApp.Run(iris.Listener(h2listener), iris.WithoutServerError(iris.ErrServerClosed))
+	if listener != nil {
+		h2listener = tls.NewListener(listener, srv.TLSConfig)
+		return d.irisApp.Run(iris.Listener(h2listener), iris.WithoutServerError(iris.ErrServerClosed))
+	}
+
+	return d.irisApp.Run(iris.Server(srv), iris.WithoutServerError(iris.ErrServerClosed))
 }
 
 func (d *irisImpl) BuildRoutes() {

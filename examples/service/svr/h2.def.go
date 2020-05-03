@@ -9,6 +9,7 @@ const (
 	typeGin
 	typeIris
 	typeGorilla
+	typeEcho
 )
 
 type (
