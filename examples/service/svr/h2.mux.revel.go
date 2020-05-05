@@ -17,6 +17,17 @@ func newRevel() *revelImpl {
 type revelImpl struct {
 }
 
+func (d *revelImpl) init() {
+}
+
+func (d *revelImpl) PreServe() (err error) {
+	return
+}
+
+func (d *revelImpl) PostServe() (err error) {
+	return
+}
+
 func (d *revelImpl) Handler() http.Handler {
 	panic("implement me")
 }
@@ -27,7 +38,4 @@ func (d *revelImpl) Serve(srv *http.Server, listener net.Listener, certFile, key
 
 func (d *revelImpl) BuildRoutes() {
 	panic("implement me")
-}
-
-func (d *revelImpl) init() {
 }

@@ -23,9 +23,9 @@ require (
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/kardianos/service v1.0.0
 	github.com/kataras/iris/v12 v12.1.8
-	github.com/labstack/echo v3.3.10+incompatible
+	github.com/labstack/echo-contrib v0.9.0
+	github.com/labstack/echo/v4 v4.1.16
 	github.com/labstack/gommon v0.3.0
-	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/moul/http2curl v1.0.0 // indirect
 	github.com/onsi/ginkgo v1.12.0 // indirect
 	github.com/onsi/gomega v1.9.0 // indirect

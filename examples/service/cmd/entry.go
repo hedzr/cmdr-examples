@@ -27,7 +27,10 @@ func Entry() {
 		// To disable internal commands and flags, uncomment the following codes
 		// cmdr.WithBuiltinCommands(false, false, false, false, false),
 
-		dex.WithDaemon(svr.NewDaemon(), dex.WithCommandsModifier(modifier), dex.WithLoggerForward(true)),
+		dex.WithDaemon(svr.NewDaemon(),
+			dex.WithCommandsModifier(modifier),
+			dex.WithLoggerForward(false),
+		),
 		// server.WithCmdrDaemonSupport(),
 		// server.WithCmdrHook(),
 

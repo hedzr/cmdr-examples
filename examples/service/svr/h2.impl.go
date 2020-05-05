@@ -12,6 +12,7 @@ import (
 	tls2 "github.com/hedzr/cmdr-examples/examples/service/svr/tls"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/acme/autocert"
+	"gopkg.in/hedzr/errors.v2"
 	"log"
 	"net"
 	"net/http"
@@ -114,7 +115,9 @@ func (d *daemonImpl) enterLoop(prog *dex.Program, stopCh, doneCh chan struct{}, 
 	return
 }
 
-func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan struct{}, listener net.Listener) (err error) {
+// onRunHttp2Server NOTE
+// listener: a copy from parent linux process, just for live reload.
+func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan struct{}, hotReloadListener net.Listener) (err error) {
 	d.appTag = prog.Command.GetRoot().AppName
 	logrus.Debugf("%q daemon OnRun, pid = %v, ppid = %v", d.appTag, os.Getpid(), os.Getppid())
 
@@ -185,21 +188,33 @@ func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan str
 	// https://posener.github.io/http2/
 
 	go func() {
+
+		// this routine will be terminated safely via golang http shutdown gracefully. 
+
+		if err = d.routerImpl.PreServe(); err != nil {
+			logrus.Fatalf("%+v", err)
+		}
+		defer func() {
+			if err = d.routerImpl.PostServe(); err != nil {
+				logrus.Fatalf("%+v", err)
+			}
+		}()
+
 		// Start the server with TLS, since we are running HTTP/2 it must be
 		// run with TLS.
 		// Exactly how you would run an HTTP/1.1 server with TLS connection.
 		if config.IsServerCertValid() || srv.TLSConfig.GetCertificate == nil {
-			logrus.Printf("Serving on https://0.0.0.0:%d with HTTPS...", port)
+			logrus.Printf("Serving on %v with HTTPS...", addr)
 			// if cmdr.FileExists("ci/certs/server.cert") && cmdr.FileExists("ci/certs/server.key") {
-			if err = d.serve(srv, listener, config.Cert, config.Key); err != http.ErrServerClosed && err != nil {
+			if err = d.serve(prog, srv, hotReloadListener, config.Cert, config.Key); err != http.ErrServerClosed && err != nil {
 				if dex.IsErrorAddressAlreadyInUse(err) {
 					if present, process := dex.FindDaemonProcess(); present {
-						logrus.Fatalf("bind to port :%v failed, it's already in use (by: pid=%v).", port, process.Pid)
+						logrus.Fatalf("cannot serve, last pid=%v, error is: %+v", process.Pid, err)
 					}
 				}
 				logrus.Fatalf("listen at port %v failed: %v", port, err)
 			}
-			// if err = d.serve(srv, listener, "ci/certs/server.cert", "ci/certs/server.key"); err != http.ErrServerClosed {
+			// if err = d.serve(srv, hotReloadListener, "ci/certs/server.cert", "ci/certs/server.key"); err != http.ErrServerClosed {
 			// 	logrus.Fatal(err)
 			// }
 			logrus.Println("end")
@@ -213,9 +228,9 @@ func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan str
 			// 			`, cmdr.GetCurrentDir())
 			// 		}
 		} else {
-			logrus.Printf("Serving on https://0.0.0.0:%d with HTTP...", port)
-			if err = d.serve(srv, listener, "", ""); err != http.ErrServerClosed && err != nil {
-				logrus.Fatal(err)
+			logrus.Printf("Serving on %v with HTTP...", addr)
+			if err = d.serve(prog, srv, hotReloadListener, "", ""); err != http.ErrServerClosed && err != nil {
+				logrus.Fatalf("%+v", err)
 			}
 			logrus.Println("end")
 		}
@@ -225,7 +240,7 @@ func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan str
 	return
 }
 
-func (d *daemonImpl) serve(srv *http.Server, listener net.Listener, certFile, keyFile string) (err error) {
+func (d *daemonImpl) serve(prog *dex.Program, srv *http.Server, listener net.Listener, certFile, keyFile string) (err error) {
 	// if srv.shuttingDown() {
 	// 	return http.ErrServerClosed
 	// }
@@ -236,14 +251,33 @@ func (d *daemonImpl) serve(srv *http.Server, listener net.Listener, certFile, ke
 	}
 
 	if listener == nil {
-		listener, err = net.Listen("tcp", addr)
-		if err != nil {
-			return err
+		if cmdr.GetBoolR("server.start.socket") {
+			sf := prog.SocketFileName()
+			if cmdr.GetBoolR("server.start.reset-socket-file") && cmdr.FileExists(sf) {
+				err = os.Remove(sf)
+				if err != nil {
+					return err
+				}
+			}
+			logrus.Infof("listening on unix sock file: %v", sf)
+			listener, err = net.Listen("unix", sf)
+			if err != nil {
+				err = errors.New("Cannot bind to unix sock %q", sf).Attach(err)
+				return err
+			}
+		} else {
+			listener, err = net.Listen("tcp", addr)
+			if err != nil {
+				err = errors.New("Cannot bind to address %v", addr).Attach(err)
+				return err
+			}
 		}
 	}
 
 	defer func() {
-		h2listener.Close()
+		if h2listener != nil {
+			h2listener.Close()
+		}
 		logrus.Printf("h2listener closed, pid=%v", os.Getpid())
 	}()
 

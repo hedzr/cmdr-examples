@@ -17,6 +17,14 @@ type ginImpl struct {
 	router *gin.Engine
 }
 
+func (d *ginImpl) PreServe() (err error) {
+	return
+}
+
+func (d *ginImpl) PostServe() (err error) {
+	return
+}
+
 func (d *ginImpl) init() {
 	gin.ForceConsoleColor()
 	d.router = gin.New()

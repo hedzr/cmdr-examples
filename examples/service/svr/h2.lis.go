@@ -20,5 +20,8 @@ type routerMux interface {
 	Handler() http.Handler
 	Serve(srv *http.Server, listener net.Listener, certFile, keyFile string) (err error)
 	BuildRoutes()
+	
+	PreServe() (err error)
+	PostServe() (err error)
 }
 

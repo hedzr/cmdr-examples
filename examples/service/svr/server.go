@@ -56,15 +56,15 @@ func (d *daemonImpl) Config() (config *service.Config) {
 	return d.config
 }
 
-func (d *daemonImpl) OnRun(prog *dex.Program, stopCh, doneCh chan struct{}, listener net.Listener) (err error) {
+func (d *daemonImpl) OnRun(prog *dex.Program, stopCh, doneCh chan struct{}, hotReloadListener net.Listener) (err error) {
 	serverType := cmdr.GetStringR("server.start.Server-Type")
 
 	prog.Logger.Infof("demo daemon OnRun (Server-Type = %q), pid = %v, ppid = %v", serverType, os.Getpid(), os.Getppid())
 
 	if serverType == "h2-server" {
-		err = d.onRunHttp2Server(prog, stopCh, doneCh, listener)
+		err = d.onRunHttp2Server(prog, stopCh, doneCh, hotReloadListener)
 		if err == nil {
-			err = d.enterLoop(prog, stopCh, doneCh, listener)
+			err = d.enterLoop(prog, stopCh, doneCh, hotReloadListener)
 		}
 		return
 	}

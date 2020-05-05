@@ -25,9 +25,24 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 			Placeholder("PORT")
 	}
 
+	ox := cmdr.NewCmdFrom(serverStartCmd)
+	
+	cmdr.NewBool(false).
+		Titles("se", "socket").
+		Description("listen to socket file", "").
+		AttachTo(ox)
+	cmdr.NewString("").
+		Titles("sf", "socket-file").
+		Description("listen to socket file (/var/run/app/app.sock)", "").
+		Placeholder("FILE").
+		AttachTo(ox)
+	cmdr.NewBool(false).
+		Titles("", "reset-socket-file").
+		Description("unlink/delete the residual socket file at first", "").
+		AttachTo(ox)
+
 	// Server-Type radio group
 
-	ox := cmdr.NewCmdFrom(serverStartCmd)
 	cmdr.NewBool(true).
 		Titles("h2", "h2-server", "h2").
 		Description("start as a HTTP/2 server", "").

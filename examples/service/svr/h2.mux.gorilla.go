@@ -21,6 +21,14 @@ type gorillaImpl struct {
 	router *mux.Router
 }
 
+func (d *gorillaImpl) PreServe() (err error) {
+	return
+}
+
+func (d *gorillaImpl) PostServe() (err error) {
+	return
+}
+
 func (d *gorillaImpl) init() {
 	d.router = mux.NewRouter()
 

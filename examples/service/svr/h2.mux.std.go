@@ -20,6 +20,14 @@ func (d *stdImpl) init() {
 	d.mux = http.NewServeMux()
 }
 
+func (d *stdImpl) PreServe() (err error) {
+	return
+}
+
+func (d *stdImpl) PostServe() (err error) {
+	return
+}
+
 func (d *stdImpl) Handler() http.Handler {
 	return d.mux
 }

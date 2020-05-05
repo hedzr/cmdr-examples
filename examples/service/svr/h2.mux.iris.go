@@ -45,6 +45,14 @@ func (d *irisImpl) init() {
 	d.irisApp.Use(logger.New())
 }
 
+func (d *irisImpl) PreServe() (err error) {
+	return
+}
+
+func (d *irisImpl) PostServe() (err error) {
+	return
+}
+
 func (d *irisImpl) Handler() http.Handler {
 	return d.irisApp
 }
