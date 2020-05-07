@@ -30,15 +30,18 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 	cmdr.NewBool(false).
 		Titles("se", "socket").
 		Description("listen to socket file", "").
+		Group("Unix Sock").
 		AttachTo(ox)
 	cmdr.NewString("").
 		Titles("sf", "socket-file").
 		Description("listen to socket file (/var/run/app/app.sock)", "").
 		Placeholder("FILE").
+		Group("Unix Sock").
 		AttachTo(ox)
 	cmdr.NewBool(false).
 		Titles("", "reset-socket-file").
 		Description("unlink/delete the residual socket file at first", "").
+		Group("Unix Sock").
 		AttachTo(ox)
 
 	// Server-Type radio group

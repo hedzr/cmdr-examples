@@ -126,7 +126,7 @@ func init() {
 		serverStartCmd := cmdr.FindSubCommand("start", serverCmd)
 		cmdr.NewInt(5100).
 			Titles("vnc", "vnc-server").
-			Description("start as a vnc server (just a demo)", "").
+			Description("start as a vnc server (just a faked demo)", "").
 			Placeholder("PORT").
 			AttachTo(cmdr.NewCmdFrom(serverStartCmd))
 	}, nil)
