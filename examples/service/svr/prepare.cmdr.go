@@ -29,18 +29,18 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 	
 	cmdr.NewBool(false).
 		Titles("se", "socket").
-		Description("listen to socket file", "").
+		Description("enable the listening on unix sock", "").
 		Group("Unix Sock").
 		AttachTo(ox)
 	cmdr.NewString("").
 		Titles("sf", "socket-file").
-		Description("listen to socket file (/var/run/app/app.sock)", "").
+		Description("the listening unix sock file (/var/run/app/app.sock)", "").
 		Placeholder("FILE").
 		Group("Unix Sock").
 		AttachTo(ox)
 	cmdr.NewBool(false).
 		Titles("", "reset-socket-file").
-		Description("unlink/delete the residual socket file at first", "").
+		Description("unlink/delete the residual unix sock file at first (for the abnormal terminated)", "").
 		Group("Unix Sock").
 		AttachTo(ox)
 
