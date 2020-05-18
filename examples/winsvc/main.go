@@ -14,7 +14,6 @@ import (
 	"path/filepath"
 )
 
-
 // .\winsvc_windows_amd64.exe -service install
 // .\winsvc_windows_amd64.exe -service uninstall
 // .\winsvc_windows_amd64.exe -service start

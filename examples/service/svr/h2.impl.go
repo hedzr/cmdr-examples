@@ -189,7 +189,7 @@ func (d *daemonImpl) onRunHttp2Server(prog *dex.Program, stopCh, doneCh chan str
 
 	go func() {
 
-		// this routine will be terminated safely via golang http shutdown gracefully. 
+		// this routine will be terminated safely via golang http shutdown gracefully.
 
 		if err = d.routerImpl.PreServe(); err != nil {
 			logrus.Fatalf("%+v", err)

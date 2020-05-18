@@ -26,7 +26,7 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 	}
 
 	ox := cmdr.NewCmdFrom(serverStartCmd)
-	
+
 	cmdr.NewBool(false).
 		Titles("se", "socket").
 		Description("enable the listening on unix sock", "").
@@ -85,7 +85,6 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 	// 	Description("create NEW CA certification", "").
 	// 	Group("Tool").
 	// 	Action(tls.CaCreate)
-
 
 	cmdr.NewBool(true).
 		Titles("iris", "iris").

@@ -4,6 +4,6 @@ package main
 
 import "github.com/hedzr/cmdr-examples/examples/service/cmd"
 
-func main(){
+func main() {
 	cmd.Entry()
 }

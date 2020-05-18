@@ -115,7 +115,7 @@ func init() {
 	// attaches `--trace` to root command
 	optAddTraceOption = cmdr.WithXrefBuildingHooks(func(root *cmdr.RootCommand, args []string) {
 		cmdr.NewBool(false).
-			Titles("tr", "trace").
+			Titles("trace", "tr").
 			Description("enable trace mode for tcp/mqtt send/recv data dump", "").
 			AttachToRoot(root)
 	}, nil)
@@ -125,7 +125,7 @@ func init() {
 		serverCmd := cmdr.FindSubCommandRecursive("server", nil)
 		serverStartCmd := cmdr.FindSubCommand("start", serverCmd)
 		cmdr.NewInt(5100).
-			Titles("vnc", "vnc-server").
+			Titles("vnc-server", "vnc").
 			Description("start as a vnc server (just a faked demo)", "").
 			Placeholder("PORT").
 			AttachTo(cmdr.NewCmdFrom(serverStartCmd))
