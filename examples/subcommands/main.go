@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"github.com/hedzr/cmdr"
+	cmdr_examples "github.com/hedzr/cmdr-examples"
 	"github.com/sirupsen/logrus"
 )
 
@@ -19,8 +20,8 @@ func Entry() {
 }
 
 func buildRootCmd() (rootCmd *cmdr.RootCommand) {
-	root := cmdr.Root(appName, "1.0.1").
-		Header("fluent - test for cmdr - no version - hedzr").
+	root := cmdr.Root(appName, cmdr_examples.Version).
+		Copyright(copyright, "hedzr").
 		Description(desc, longDesc).
 		Examples(examples)
 	rootCmd = root.RootCommand()
