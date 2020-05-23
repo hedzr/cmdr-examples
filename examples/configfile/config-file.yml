@@ -1,0 +1,15 @@
+#
+#
+#
+#
+#
+
+app:
+  config-file:
+    bool: true
+    string: string
+    int: 9
+
+
+
+
