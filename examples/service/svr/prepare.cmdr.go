@@ -28,18 +28,18 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 	ox := cmdr.NewCmdFrom(serverStartCmd)
 
 	cmdr.NewBool(false).
-		Titles("se", "socket").
+		Titles("socket", "se").
 		Description("enable the listening on unix sock", "").
 		Group("Unix Sock").
 		AttachTo(ox)
 	cmdr.NewString("").
-		Titles("sf", "socket-file").
+		Titles("socket-file", "sf").
 		Description("the listening unix sock file (/var/run/app/app.sock)", "").
 		Placeholder("FILE").
 		Group("Unix Sock").
 		AttachTo(ox)
 	cmdr.NewBool(false).
-		Titles("", "reset-socket-file").
+		Titles("reset-socket-file", "").
 		Description("unlink/delete the residual unix sock file at first (for the abnormal terminated)", "").
 		Group("Unix Sock").
 		AttachTo(ox)
@@ -47,12 +47,12 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 	// Server-Type radio group
 
 	cmdr.NewBool(true).
-		Titles("h2", "h2-server", "h2").
+		Titles("h2-server", "h2", "").
 		Description("start as a HTTP/2 server", "").
 		ToggleGroup("Server-Type").
 		AttachTo(ox)
 	cmdr.NewBool(false).
-		Titles("lp", "cmdexec-loop").
+		Titles("cmdexec-loop", "lp").
 		Description("start a worker and loop for cmd exec", "").
 		ToggleGroup("Server-Type").
 		AttachTo(ox)
@@ -115,7 +115,7 @@ func (d *daemonImpl) OnCmdrPrepare(prog *dex.Program, root *cmdr.RootCommand) (e
 	// http 2 client
 
 	cmdr.NewCmdFrom(&root.Command).NewSubCommand().
-		Titles("h2", "h2-test").
+		Titles("h2-test", "h2").
 		Description("test http 2 client", "test http 2 client,\nverbose long descriptions here.").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
