@@ -14,3 +14,16 @@ TODO
 
 
 
+## `service`
+
+new service app with [`dex` plugin](https://github.com/hedzr/cmdr-addons/tree/master/pkg/dex):
+
+<https://github.com/hedzr/cmdr-examples/tree/master/examples/service>
+
+
+
+## LICENSE
+
+Feel free with MIT.
+
+
