@@ -104,6 +104,8 @@ github.com/hashicorp/go-version v1.2.0/go.mod h1:fltr4n8CU8Ke44wwGCBoEymUuxUHl09
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
 github.com/hedzr/cmdr v1.6.39 h1:kT8GI2qP8NcmWsdeULhl+m3QHZUC5VZfwPK7tn+5mOo=
 github.com/hedzr/cmdr v1.6.39/go.mod h1:8AGTWbSeCReLFRFoDa0dJndy47hAYZaJ3SKne4CJBpA=
+github.com/hedzr/cmdr-addons v1.0.0 h1:8QH31xa+MdTd7M3qxJRopRDPIEeE7dNYTCbORo75jcE=
+github.com/hedzr/cmdr-addons v1.0.0/go.mod h1:siOIHMzpnRCx304Ox7dSUMzixy8SHejUaKobY/3ACU4=
 github.com/hedzr/logex v1.1.8 h1:tj/WGe/QNKztpk7+Y3jCERuTeTIcGeEpBIRpEqCZAsE=
 github.com/hedzr/logex v1.1.8/go.mod h1:jRRmApDZ7jYeT3e1vw+9DNnXByVMCEh6jFQhjOZYaQc=
 github.com/hpcloud/tail v1.0.0 h1:nfCOvKYfkgYP8hkirhJocXT2+zOD8yUNjXaWfTlyFKI=
