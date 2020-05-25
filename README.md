@@ -1,5 +1,8 @@
 # Examples for `cmdr`
 
+![Go](https://github.com/hedzr/cmdr-examples/workflows/Go/badge.svg)
+
+
 see also [`cmdr`](https://github.com/hedzr/cmdr), [`cmdr-addons`](https://github.com/hedzr/cmdr-addons).
 
 ## Status
