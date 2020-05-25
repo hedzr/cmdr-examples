@@ -1,0 +1,4 @@
+
+app:
+  config-file:
+    updated: true      # bool item
