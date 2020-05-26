@@ -37,26 +37,28 @@ func WithShellModule() cmdr.ExecOption {
 				Titles("shell", "sh").
 				Description("enable internal shell prompt mode", "").
 				Action(doShellModeAction)
-			shell.NewFlagV(true).Titles("0", "demo-0").ToggleGroup("Sample")
-			shell.NewFlagV(false).Titles("1", "demo-1").ToggleGroup("Sample")
-			shell.NewFlagV(false).Titles("2", "demo-2").ToggleGroup("Sample")
-			shell.NewFlagV(false).Titles("3", "demo-3").ToggleGroup("Sample")
-			shell.NewFlagV(false).Titles("4", "demo-4").ToggleGroup("Sample")
+			shell.NewFlagV(true).Titles("demo-0", "0").ToggleGroup("Sample")
+			shell.NewFlagV(false).Titles("demo-1", "1").ToggleGroup("Sample")
+			shell.NewFlagV(false).Titles("demo-2", "2").ToggleGroup("Sample")
+			shell.NewFlagV(false).Titles("demo-3", "3").ToggleGroup("Sample")
+			shell.NewFlagV(false).Titles("demo-4", "4").ToggleGroup("Sample")
 		})
 	}
 }
 
 func doShellModeAction(cmd *cmdr.Command, args []string) (err error) {
-	if cmdr.GetBoolR("shell.demo-1") {
-		run1()
-	} else if cmdr.GetBoolR("shell.demo-2") {
-		run2()
-	} else if cmdr.GetBoolR("shell.demo-3") {
-		run3()
-	} else if cmdr.GetBoolR("shell.demo-4") {
-		run4()
-	} else if cmdr.GetBoolR("shell.demo-0") {
+	// logrus.Println(cmdr.GetStringR("shell.Sample"))
+	switch cmdr.GetStringR("shell.Sample") {
+	case "demo-0":
 		run0()
+	case "demo-1":
+		run1()
+	case "demo-2":
+		run2()
+	case "demo-3":
+		run3()
+	case "demo-4":
+		run4()
 	}
 	return
 }
