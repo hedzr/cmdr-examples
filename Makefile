@@ -77,7 +77,7 @@ CN = hedzr/$(N)
 
 
 
-MAIN_APPS = fluent winsvc service
+MAIN_APPS = configfile envvars flags interactive-prompt panics progressbar service shell-mode simple subcommands tui-demo 
 MAIN_BUILD_PKG = ./examples
 # MAIN_APPS = cli
 # MAIN_BUILD_PKG = .
