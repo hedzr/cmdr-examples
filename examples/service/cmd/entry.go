@@ -37,28 +37,28 @@ func Entry() {
 		// integrate with logex library
 		cmdr.WithLogex(cmdr.DebugLevel),
 		cmdr.WithLogexPrefix("logger"),
-		
+
 		cmdr.WithPagerEnabled(),
-		
-// 		cmdr.WithHelpTailLine(`
-// Type '-h'/'-?' or '--help' to get command help screen.
-// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
-// 
-// Type '-h'/'-?' or '--help' to get command help screen.
-// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
-// 
-// Type '-h'/'-?' or '--help' to get command help screen.
-// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
-// 
-// Type '-h'/'-?' or '--help' to get command help screen.
-// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
-// 
-// Type '-h'/'-?' or '--help' to get command help screen.
-// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
-// 
-// Type '-h'/'-?' or '--help' to get command help screen.
-// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
-// 		`),
+
+		// 		cmdr.WithHelpTailLine(`
+		// Type '-h'/'-?' or '--help' to get command help screen.
+		// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
+		//
+		// Type '-h'/'-?' or '--help' to get command help screen.
+		// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
+		//
+		// Type '-h'/'-?' or '--help' to get command help screen.
+		// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
+		//
+		// Type '-h'/'-?' or '--help' to get command help screen.
+		// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
+		//
+		// Type '-h'/'-?' or '--help' to get command help screen.
+		// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
+		//
+		// Type '-h'/'-?' or '--help' to get command help screen.
+		// More: '-D'/'--debug'['--env'|'--raw'|'--more'], '-V'/'--version', '-#'/'--build-info', '--no-color', '--strict-mode', '--no-env-overrides'...
+		// 		`),
 
 		cmdr.WithHelpTabStop(51),
 
