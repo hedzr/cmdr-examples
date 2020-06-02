@@ -33,4 +33,5 @@ require (
 	golang.org/x/sys v0.0.0-20200519105757-fe76b779f299
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
 	gopkg.in/hedzr/errors.v2 v2.0.12
+	gopkg.in/yaml.v2 v2.3.0
 )

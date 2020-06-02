@@ -3,7 +3,7 @@
 
 // Copyright © 2020 Hedzr Yeh.
 
-package tool
+package unsorted
 
 // PollardArray converts 'in' to new return object A.
 func PollardArray(in []interface{}) interface{} {

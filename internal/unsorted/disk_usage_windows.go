@@ -3,7 +3,7 @@
 
 // Copyright © 2020 Hedzr Yeh.
 
-package tool
+package unsorted
 
 // DiskUsage is for disk usage of path/disk
 func DiskUsage(path string) (disk DiskStatus) {

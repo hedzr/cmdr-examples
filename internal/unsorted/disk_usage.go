@@ -3,7 +3,7 @@
 
 // Copyright © 2020 Hedzr Yeh.
 
-package tool
+package unsorted
 
 // DiskStatus provides the disk usages
 type DiskStatus struct {

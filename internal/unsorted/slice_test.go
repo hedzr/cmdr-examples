@@ -1,9 +1,9 @@
 // Copyright © 2020 Hedzr Yeh.
 
-package tool_test
+package unsorted_test
 
 import (
-	"github.com/hedzr/njuone/internal/tool"
+	"github.com/hedzr/cmdr-examples/internal/unsorted"
 	"gopkg.in/yaml.v2"
 	"testing"
 )
@@ -41,7 +41,7 @@ testArrMap:
 		t.Fatal(err)
 	}
 
-	to = tool.MergeMap(to, from)
+	to = unsorted.MergeMap(to, from)
 
 	// // NOTE: merge CAN'T merge two map directly!!
 	// if err := mergo.Merge(&to, from); err != nil {
