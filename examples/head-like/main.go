@@ -34,7 +34,7 @@ func headLike(root cmdr.OptCmd) {
 	// head-like
 
 	cmdr.NewInt(1).
-		Titles("lines", "l").
+		Titles("lines", "n").
 		Description("how many lines to be processed").
 		HeadLike(true, 0, 1000).
 		AttachTo(root)
