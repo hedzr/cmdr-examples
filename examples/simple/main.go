@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/hedzr/cmdr"
 	cmdr_examples "github.com/hedzr/cmdr-examples"
+	"gopkg.in/hedzr/errors.v2"
 )
 
 func main() {
@@ -13,9 +14,22 @@ func main() {
 }
 
 func Entry() {
-	if err := cmdr.Exec(buildRootCmd()); err != nil {
+	if err := cmdr.Exec(buildRootCmd(), cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler)); err != nil {
 		fmt.Printf("error: %+v\n", err)
 	}
+}
+
+func onUnhandledErrorHandler(err interface{}) {
+	if cmdr.GetBoolR("enable-ueh") {
+		dumpStacks()
+		return
+	}
+
+	panic(err)
+}
+
+func dumpStacks() {
+	fmt.Printf("=== BEGIN goroutine stack dump ===\n%s\n=== END goroutine stack dump ===\n", errors.DumpStacksAsString(true))
 }
 
 func buildRootCmd() (rootCmd *cmdr.RootCommand) {
@@ -27,7 +41,8 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 
 	cmdr.NewBool(false).
 		Titles("enable-ueh", "ueh").
-		Description("Enables the unhandled exception handler?")
+		Description("Enables the unhandled exception handler?").
+		AttachTo(root)
 
 	soundex(root)
 	panicTest(root)

@@ -44,7 +44,8 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 
 	cmdr.NewBool(false).
 		Titles("enable-ueh", "ueh").
-		Description("Enables the unhandled exception handler?")
+		Description("Enables the unhandled exception handler?").
+		AttachTo(root)
 
 	soundex(root)
 	panicTest(root)

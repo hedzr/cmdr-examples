@@ -33,10 +33,6 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 		Examples(examples)
 	rootCmd = root.RootCommand()
 
-	cmdr.NewBool(false).
-		Titles("enable-ueh", "ueh").
-		Description("Enables the unhandled exception handler?")
-
 	panicTest(root)
 	kbPrint(root)
 	soundex(root)
