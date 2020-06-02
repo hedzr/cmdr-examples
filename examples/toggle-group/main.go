@@ -25,10 +25,11 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 		Examples(examples)
 	rootCmd = root.RootCommand()
 
-	cmdr.NewBool(false).Titles("ueh", "enable-ueh", "Enables the unhandled exception handler?")
+	cmdr.NewBool(false).
+		Titles("enable-ueh", "ueh").
+		Description("Enables the unhandled exception handler?")
 
 	tg(root)
-	panicTest(root)
 
 	return
 }
@@ -51,11 +52,11 @@ func tg(root cmdr.OptCmd) {
 			return
 		})
 
-	cmdr.NewBool(false).Titles("echo", "echo").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
-	cmdr.NewBool(false).Titles("gin", "gin").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
-	cmdr.NewBool(false).Titles("gorilla", "gorilla").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
-	cmdr.NewBool(true).Titles("iris", "iris").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
-	cmdr.NewBool(false).Titles("std", "std").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
+	cmdr.NewBool(false).Titles("echo", "echo").Description("using 'echo' mux").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
+	cmdr.NewBool(false).Titles("gin", "gin").Description("using 'gin' mux").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
+	cmdr.NewBool(false).Titles("gorilla", "gorilla").Description("using 'gorilla' mux").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
+	cmdr.NewBool(true).Titles("iris", "iris").Description("using 'iris' mux").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
+	cmdr.NewBool(false).Titles("std", "std").Description("using standardlib http mux mux").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
 }
 
 const (
