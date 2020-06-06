@@ -16,11 +16,14 @@ func WithTraceEnable(enabled bool) cmdr.ExecOption {
 			if enabled {
 				// attaches `--trace` to root command
 				cmdr.NewBool(false).
-					Titles("tr", "trace").
+					Titles("trace", "tr").
 					Description("enable trace mode for tcp/mqtt send/recv data dump").
 					Group(cmdr.SysMgmtGroup).
+					EnvKeys("TRACE").
 					OnSet(func(keyPath string, value interface{}) {
-						if b, ok := value.(bool); ok && b {
+						// fmt.Printf("trace: %v\n", value)
+						b := cmdr.ToBool(value)
+						if b {
 							_ = Start()
 							root.AppendPostActions(func(cmd *cmdr.Command, args []string) {
 								Stop()
