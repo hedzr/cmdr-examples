@@ -25,9 +25,9 @@ func AddFlags(root cmdr.OptCmd) {
 			prd("uint64", cmdr.GetUint64R("flags.uint64"), "")
 			prd("float32", cmdr.GetFloat32R("flags.float32"), "")
 			prd("float64", cmdr.GetFloat64R("flags.float64"), "")
-		prd("complex64", cmdr.GetComplex64R("flags.complex64"), "")
-		prd("complex128", cmdr.GetComplex128R("flags.complex128"), "")
-		prd("bool", cmdr.GetBoolR("flags.bool"), "")
+			prd("complex64", cmdr.GetComplex64R("flags.complex64"), "")
+			prd("complex128", cmdr.GetComplex128R("flags.complex128"), "")
+			prd("bool", cmdr.GetBoolR("flags.bool"), "")
 			return
 		})
 
