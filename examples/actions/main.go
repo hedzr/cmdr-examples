@@ -5,8 +5,8 @@ package main
 import (
 	"fmt"
 	"github.com/hedzr/cmdr"
+	"github.com/hedzr/cmdr-addons/pkg/plugins/trace"
 	cmdr_examples "github.com/hedzr/cmdr-examples"
-	"github.com/hedzr/cmdr-examples/internal/trace"
 	"gopkg.in/hedzr/errors.v2"
 )
 
@@ -15,7 +15,10 @@ func main() {
 }
 
 func Entry() {
-	if err := cmdr.Exec(buildRootCmd(), cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler)); err != nil {
+	if err := cmdr.Exec(buildRootCmd(),
+		trace.WithTraceEnable(true),
+		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
+		); err != nil {
 		fmt.Printf("error: %+v\n", err)
 	}
 }
