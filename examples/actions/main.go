@@ -81,15 +81,15 @@ func soundex(root cmdr.OptCmd) {
 				fmt.Printf("[ACTION] %5d. %s => %s\n", ix, s, cmdr.Soundex(s))
 			}
 
-			prd("bool", cmdr.GetBoolR("flags.bool"), "")
-			prd("int", cmdr.GetIntR("flags.int"), "")
-			prd("int64", cmdr.GetInt64R("flags.int64"), "")
-			prd("uint", cmdr.GetUintR("flags.uint"), "")
-			prd("uint64", cmdr.GetUint64R("flags.uint64"), "")
-			prd("float32", cmdr.GetFloat32R("flags.float32"), "")
-			prd("float64", cmdr.GetFloat64R("flags.float64"), "")
-			prd("complex64", cmdr.GetComplex64R("flags.complex64"), "")
-			prd("complex128", cmdr.GetComplex128R("flags.complex128"), "")
+			prd("bool", cmdr.GetBoolR("soundex.bool"), "")
+			prd("int", cmdr.GetIntR("soundex.int"), "")
+			prd("int64", cmdr.GetInt64R("soundex.int64"), "")
+			prd("uint", cmdr.GetUintR("soundex.uint"), "")
+			prd("uint64", cmdr.GetUint64R("soundex.uint64"), "")
+			prd("float32", cmdr.GetFloat32R("soundex.float32"), "")
+			prd("float64", cmdr.GetFloat64R("soundex.float64"), "")
+			prd("complex64", cmdr.GetComplex64R("soundex.complex64"), "")
+			prd("complex128", cmdr.GetComplex128R("soundex.complex128"), "")
 
 			return
 		}).
@@ -107,7 +107,7 @@ func soundex(root cmdr.OptCmd) {
 		AttachTo(parent)
 
 	cmdr.NewInt(1).
-		Titles("int", "i").
+		Titles("int", "i", "i32").
 		Description("A int flag", "").
 		Group("1000.Integer").
 		EnvKeys("").
@@ -119,7 +119,7 @@ func soundex(root cmdr.OptCmd) {
 		EnvKeys("").
 		AttachTo(parent)
 	cmdr.NewUint(3).
-		Titles("uint", "u").
+		Titles("uint", "u", "u32").
 		Description("A uint flag", "").
 		Group("1000.Integer").
 		EnvKeys("").
@@ -132,7 +132,7 @@ func soundex(root cmdr.OptCmd) {
 		AttachTo(parent)
 
 	cmdr.NewFloat32(2.71828).
-		Titles("float32", "f", "float").
+		Titles("float32", "f", "float", "f32").
 		Description("A float32 flag with 'e' value", "").
 		Group("2000.Float").
 		EnvKeys("E", "E2").

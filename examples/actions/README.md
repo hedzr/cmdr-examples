@@ -9,5 +9,5 @@ go run ./examples/actions soundex quick fox jumps
 go run -tags=delve ./examples/actions/ snd quick fox jumps
 
 # complex case:
-go run -tags=delve ./examples/actions soundex -f64 7.32 -f 9.9 quick -u 72 fox -c64 2.718+5.71i jumps
+go run -tags=delve ./examples/actions soundex -f64 7.32 -f 9.9 quick -u 72 fox -c64 2.718+5.71i jumps -i 073 -u 065 -f64 3e+7
 ```
