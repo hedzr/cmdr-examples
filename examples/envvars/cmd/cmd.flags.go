@@ -2,14 +2,34 @@
 
 package cmd
 
-import "github.com/hedzr/cmdr"
+import (
+	"fmt"
+	"github.com/hedzr/cmdr"
+)
+
+func prd(key string, val interface{}, format string, params ...interface{}) {
+	fmt.Printf("[--%v] %v, %v\n", key, val, fmt.Sprintf(format, params...))
+}
 
 func AddFlags(root cmdr.OptCmd) {
 	// tags sub-commands
 
 	parent := root.NewSubCommand("flags", "f").
-		Description("flags demo", "").
-		Group("")
+		Description("envvars: flags demo", "").
+		Group("").
+		Action(func(cmd *cmdr.Command, args []string) (err error) {
+			prd("bool", cmdr.GetBoolR("flags.bool"), "")
+			prd("int", cmdr.GetIntR("flags.int"), "")
+			prd("int64", cmdr.GetInt64R("flags.int64"), "")
+			prd("uint", cmdr.GetUintR("flags.uint"), "")
+			prd("uint64", cmdr.GetUint64R("flags.uint64"), "")
+			prd("float32", cmdr.GetFloat32R("flags.float32"), "")
+			prd("float64", cmdr.GetFloat64R("flags.float64"), "")
+		prd("complex64", cmdr.GetComplex64R("flags.complex64"), "")
+		prd("complex128", cmdr.GetComplex128R("flags.complex128"), "")
+		prd("bool", cmdr.GetBoolR("flags.bool"), "")
+			return
+		})
 
 	cmdr.NewBool(false).
 		Titles("bool", "b").
@@ -61,7 +81,7 @@ func AddFlags(root cmdr.OptCmd) {
 		Group("2010.Complex").
 		EnvKeys("").
 		AttachTo(parent)
-	cmdr.NewComplex64(3.14+9i).
+	cmdr.NewComplex128(3.14+9i).
 		Titles("complex128", "c128").
 		Description("A complex128 flag", "").
 		Group("2010.Complex").
