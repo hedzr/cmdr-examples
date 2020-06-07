@@ -16,9 +16,11 @@ func main() {
 
 func Entry() {
 	if err := cmdr.Exec(buildRootCmd(),
+
 		trace.WithTraceEnable(true),
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
-		); err != nil {
+
+	); err != nil {
 		fmt.Printf("error: %+v\n", err)
 	}
 }
@@ -65,9 +67,9 @@ func soundex(root cmdr.OptCmd) {
 		Description("soundex test").
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
-		PreAction(func(cmd *cmdr.Command, args []string) (err error) {
+		PreAction(func(cmd *cmdr.Command, remainArgs []string) (err error) {
 			fmt.Printf("[PRE] DebugMode=%v, TraceMode=%v. InDebugging/IsDebuggerAttached=%v\n", cmdr.GetDebugMode(), trace.IsEnabled(), cmdr.InDebugging())
-			for ix, s := range args {
+			for ix, s := range remainArgs {
 				fmt.Printf("[PRE] %5d. %s\n", ix, s)
 			}
 
@@ -78,8 +80,8 @@ func soundex(root cmdr.OptCmd) {
 			// return other errors for application purpose
 			return
 		}).
-		Action(func(cmd *cmdr.Command, args []string) (err error) {
-			for ix, s := range args {
+		Action(func(cmd *cmdr.Command, remainArgs []string) (err error) {
+			for ix, s := range remainArgs {
 				// fmt.Printf("[ACTION] %5d. %s\n", ix, s)
 				fmt.Printf("[ACTION] %5d. %s => %s\n", ix, s, cmdr.Soundex(s))
 			}
@@ -94,10 +96,14 @@ func soundex(root cmdr.OptCmd) {
 			prd("complex64", cmdr.GetComplex64R("soundex.complex64"), "")
 			prd("complex128", cmdr.GetComplex128R("soundex.complex128"), "")
 
+			prd("single", cmdr.GetBoolR("soundex.single"), "")
+			prd("double", cmdr.GetBoolR("soundex.double"), "")
+			prd("norway", cmdr.GetBoolR("soundex.norway"), "")
+			prd("mongo", cmdr.GetBoolR("soundex.mongo"), "")
 			return
 		}).
-		PostAction(func(cmd *cmdr.Command, args []string) {
-			for ix, s := range args {
+		PostAction(func(cmd *cmdr.Command, remainArgs []string) {
+			for ix, s := range remainArgs {
 				fmt.Printf("[POST] %5d. %s\n", ix, s)
 			}
 		})
@@ -156,6 +162,34 @@ func soundex(root cmdr.OptCmd) {
 		Titles("complex128", "c128").
 		Description("A complex128 flag", "").
 		Group("2010.Complex").
+		EnvKeys("").
+		AttachTo(parent)
+
+	cmdr.NewBool(false).
+		Titles("single", "s").
+		Description("A bool flag: single", "").
+		Group("Boolean").
+		EnvKeys("").
+		AttachTo(parent)
+
+	cmdr.NewBool(false).
+		Titles("double", "d").
+		Description("A bool flag: double", "").
+		Group("Boolean").
+		EnvKeys("").
+		AttachTo(parent)
+
+	cmdr.NewBool(false).
+		Titles("norway", "n", "nw").
+		Description("A bool flag: norway", "").
+		Group("Boolean").
+		EnvKeys("").
+		AttachTo(parent)
+
+	cmdr.NewBool(false).
+		Titles("mongo", "m").
+		Description("A bool flag: mongo", "").
+		Group("Boolean").
 		EnvKeys("").
 		AttachTo(parent)
 
