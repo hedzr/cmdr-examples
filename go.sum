@@ -114,8 +114,8 @@ github.com/hashicorp/go-version v1.2.0/go.mod h1:fltr4n8CU8Ke44wwGCBoEymUuxUHl09
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
 github.com/hedzr/cmdr v1.6.47 h1:IbyHrAA42FPGB2Fn6KnMerXuKUDlW8tYUsg7rMMvAQg=
 github.com/hedzr/cmdr v1.6.47/go.mod h1:8AGTWbSeCReLFRFoDa0dJndy47hAYZaJ3SKne4CJBpA=
-github.com/hedzr/cmdr-addons v1.0.11 h1:oKMWtRQuM4l/0EnJ8GujzHYnwCTZ1bJHSPRl2XDKp8U=
-github.com/hedzr/cmdr-addons v1.0.11/go.mod h1:znU2QAijm8PzzLqhUTVNdnr/230SHKSpmpALn167Jqg=
+github.com/hedzr/cmdr-addons v1.0.13 h1:5yHfOEOmKbJAfPMPPOE1ZiL5rW3w6Fk/vhVaQ0dziAU=
+github.com/hedzr/cmdr-addons v1.0.13/go.mod h1:znU2QAijm8PzzLqhUTVNdnr/230SHKSpmpALn167Jqg=
 github.com/hedzr/logex v1.1.8 h1:tj/WGe/QNKztpk7+Y3jCERuTeTIcGeEpBIRpEqCZAsE=
 github.com/hedzr/logex v1.1.8/go.mod h1:jRRmApDZ7jYeT3e1vw+9DNnXByVMCEh6jFQhjOZYaQc=
 github.com/hinshun/vt10x v0.0.0-20180616224451-1954e6464174/go.mod h1:DqJ97dSdRW1W22yXSB90986pcOyQ7r45iio1KN2ez1A=

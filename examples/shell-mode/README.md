@@ -22,5 +22,6 @@ Type `exit`, `quit`, or shortcut  `CTRL-D` to terminate the prompt session.
 
 
 
-`shell-mode` depends on [`shell`](https://github.com/hedzr/cmdr-examples/tree/master/internal/shell) plugin and you can improve it. It is powered by https://github.com/c-bata/go-prompt.
+`shell-mode` app depends on [`shell`/`shell-prompt`](https://github.com/hedzr/cmdr-examples/tree/master/internal/shell) plugin.
+It is powered by https://github.com/c-bata/go-prompt.
 

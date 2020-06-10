@@ -12,10 +12,10 @@ go 1.14
 
 require (
 	github.com/Netflix/go-expect v0.0.0-20200312175327-da48e75238e2 // indirect
-	github.com/c-bata/go-prompt v0.2.3
+	github.com/c-bata/go-prompt v0.2.3 // indirect
 	github.com/gizak/termui/v3 v3.1.0
 	github.com/hedzr/cmdr v1.6.47
-	github.com/hedzr/cmdr-addons v1.0.11
+	github.com/hedzr/cmdr-addons v1.0.13
 	github.com/hedzr/logex v1.1.8
 	github.com/hinshun/vt10x v0.0.0-20180809195222-d55458df857c // indirect
 	github.com/kardianos/service v1.0.0

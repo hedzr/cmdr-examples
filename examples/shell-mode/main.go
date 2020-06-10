@@ -5,8 +5,8 @@ package main
 import (
 	"fmt"
 	"github.com/hedzr/cmdr"
+	"github.com/hedzr/cmdr-addons/pkg/plugins/shell"
 	cmdrexamples "github.com/hedzr/cmdr-examples"
-	"github.com/hedzr/cmdr-examples/internal/shell"
 	"github.com/hedzr/logex"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
