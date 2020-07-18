@@ -230,7 +230,7 @@ run:
 
 go-build:
 	@echo "  >  Building binary '$(GOBIN)/$(APPNAME)'..."
-	# demo short wget-demo 
+	# demo short wget-cover 
 	$(foreach an, $(MAIN_APPS), \
 	  echo "     +race. APPNAME = $(APPNAME)|$(an), LDFLAGS = $(LDFLAGS)"; \
 	  $(GO) build -v -race -ldflags "$(LDFLAGS)" -o $(GOBIN)/$(an) $(GOBASE)/$(MAIN_BUILD_PKG)/$(an); \
