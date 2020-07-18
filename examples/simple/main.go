@@ -41,7 +41,13 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 
 	cmdr.NewBool(false).
 		Titles("enable-ueh", "ueh").
+		EnvKeys("ENABLE_UEH").
 		Description("Enables the unhandled exception handler?").
+		OnSet(func(keyPath string, value interface{}) {
+			if value == true {
+				panic("unexpected value: true")
+			}
+		}).
 		AttachTo(root)
 
 	soundex(root)
