@@ -73,28 +73,28 @@ func AddFlags(root cmdr.OptCmd) {
 	cmdr.NewBool().
 		Titles("single", "s").
 		Description("A bool flag: single", "").
-		Group("Boolean").
+		Group("0100.Boolean").
 		EnvKeys("").
 		AttachTo(parent)
 
 	cmdr.NewBool().
 		Titles("double", "d").
 		Description("A bool flag: double", "").
-		Group("Boolean").
+		Group("0100.Boolean").
 		EnvKeys("").
 		AttachTo(parent)
 
 	cmdr.NewBool().
 		Titles("norway", "n", "nw").
 		Description("A bool flag: norway", "").
-		Group("Boolean").
+		Group("0100.Boolean").
 		EnvKeys("").
 		AttachTo(parent)
 
 	cmdr.NewBool().
 		Titles("mongo", "m").
 		Description("A bool flag: mongo", "").
-		Group("Boolean").
+		Group("0100.Boolean").
 		EnvKeys("").
 		AttachTo(parent)
 
@@ -110,7 +110,7 @@ func AddFlags(root cmdr.OptCmd) {
 	cmdr.NewDuration(time.Second).
 		Titles("time-duration-value", "tdv").
 		Description("A time duration flag: '3m15s', ...", "").
-		Group("").
+		Group("8100.Duration").
 		EnvKeys("").
 		AttachTo(parent)
 
@@ -119,15 +119,16 @@ func AddFlags(root cmdr.OptCmd) {
 	cmdr.NewIntSlice(1, 2, 3).
 		Titles("int-slice-value", "isv").
 		Description("A int slice flag: ", "").
-		Group("Array").
+		Group("8200.Array").
 		EnvKeys("").
 		AttachTo(parent)
 
 	cmdr.NewStringSlice("quick", "fox", "jumps").
 		Titles("string-slice-value", "ssv").
 		Description("A string slice flag: ", ``).
-		Group("Array").
+		Group("8200.Array").
 		EnvKeys("").
+		Deprecated("1.2.1").
 		Examples(``).
 		AttachTo(parent)
 
