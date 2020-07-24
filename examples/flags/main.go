@@ -15,7 +15,7 @@ func main() {
 
 func Entry() {
 	if err := cmdr.Exec(buildRootCmd()); err != nil {
-		logrus.Fatalf("error: %+v", err)
+		logrus.Fatalf("error: %v", err)
 	}
 }
 
