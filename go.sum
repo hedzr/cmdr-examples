@@ -112,8 +112,10 @@ github.com/gorilla/websocket v1.4.1 h1:q7AeDBpnBk8AogcD4DSag/Ukw/KV+YhzLj2bP5HvK
 github.com/gorilla/websocket v1.4.1/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/hashicorp/go-version v1.2.0/go.mod h1:fltr4n8CU8Ke44wwGCBoEymUuxUHl09ZGVZPK5anwXA=
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
-github.com/hedzr/cmdr-addons v1.0.16 h1:14/5iC9G56uWhai6ekGbsQqFxBkR8ei4qkQ64FeDdYQ=
-github.com/hedzr/cmdr-addons v1.0.16/go.mod h1:7Y+ZC1CESxA+bpH/e7Aj6XiK9ulJ5TzZ9+ESO1ABu5g=
+github.com/hedzr/cmdr v1.6.51 h1:Lk/2kFpUlzFZ//r75SSGy9+ExPkbOtZLfSvuTcAjhjg=
+github.com/hedzr/cmdr v1.6.51/go.mod h1:AAF26kPlzw06PIZneao2K91+kvOqdsKAXxvx2X0yQTk=
+github.com/hedzr/cmdr-addons v1.0.17 h1:H9/hsaoykKoyszfygqtfPpWkXlohm0/sVk1OSB3ZDLU=
+github.com/hedzr/cmdr-addons v1.0.17/go.mod h1:QdYucR1tAKrRgN7U3uKEfWH7NfpBPwVFfrzo/gUDWgU=
 github.com/hedzr/logex v1.1.10 h1:RAoLq8QyJTxIrXpasnoZnR3K+7E8/9PD/IWBhyMAAR4=
 github.com/hedzr/logex v1.1.10/go.mod h1:2sKhmF78EBODn7OOyTIALIB/o4O9WgQ5a8dp5n169Cw=
 github.com/hinshun/vt10x v0.0.0-20180616224451-1954e6464174/go.mod h1:DqJ97dSdRW1W22yXSB90986pcOyQ7r45iio1KN2ez1A=
