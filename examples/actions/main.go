@@ -223,10 +223,10 @@ func panicTest(root cmdr.OptCmd) {
 }
 
 const (
-	appName   = "simple"
-	copyright = "simple is an effective devops tool"
-	desc      = "simple is an effective devops tool. It make an demo application for `cmdr`."
-	longDesc  = "simple is an effective devops tool. It make an demo application for `cmdr`."
+	appName   = "actions"
+	copyright = "actions is an effective devops tool"
+	desc      = "actions is an effective devops tool. It make an demo application for `cmdr`."
+	longDesc  = "actions is an effective devops tool. It make an demo application for `cmdr`."
 	examples  = `
 $ {{.AppName}} gen shell [--bash|--zsh|--auto]
   generate bash/shell completion scripts

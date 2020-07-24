@@ -45,11 +45,11 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 }
 
 const (
-	appName   = "flag-demo"
 	version   = "1.0.0"
-	copyright = "flag-demo is an effective devops tool"
-	desc      = "flag-demo is an effective devops tool. It make an demo application for `cmdr`."
-	longDesc  = "flag-demo is an effective devops tool. It make an demo application for `cmdr`."
+	appName   = "golang-style"
+	copyright = "golang-style is an effective devops tool"
+	desc      = "golang-style is an effective devops tool. It make an demo application for `cmdr`."
+	longDesc  = "golang-style is an effective devops tool. It make an demo application for `cmdr`."
 	examples  = `
 $ {{.AppName}} gen shell [--bash|--zsh|--auto]
   generate bash/shell completion scripts

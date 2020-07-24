@@ -143,10 +143,10 @@ func mx(root cmdr.OptCmd) {
 }
 
 const (
-	appName   = "kilo-bytes"
-	copyright = "kilo-bytes is an effective devops tool"
-	desc      = "kilo-bytes is an effective devops tool. It make an demo application for `cmdr`."
-	longDesc  = "kilo-bytes is an effective devops tool. It make an demo application for `cmdr`."
+	appName   = "editor-tool"
+	copyright = "editor-tool is an effective devops tool"
+	desc      = "editor-tool is an effective devops tool. It make an demo application for `cmdr`."
+	longDesc  = "editor-tool is an effective devops tool. It make an demo application for `cmdr`."
 	examples  = `
 $ {{.AppName}} gen shell [--bash|--zsh|--auto]
   generate bash/shell completion scripts
