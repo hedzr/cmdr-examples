@@ -132,6 +132,20 @@ func AddFlags(root cmdr.OptCmd) {
 		Examples(``).
 		AttachTo(parent)
 
+	// required flag
+
+	cmdr.NewString().
+		Titles("required", "required").
+		Description("A required flag", "").
+		Required().
+		AttachTo(parent)
+
+	cmdr.NewString().
+		Titles("required2", "required2").
+		Description("The required flag 2", "").
+		Required().
+		AttachTo(parent)
+
 }
 
 func flagsAction(cmd *cmdr.Command, args []string) (err error) {
@@ -161,6 +175,11 @@ func flagsAction(cmd *cmdr.Command, args []string) (err error) {
 
 	prd("int-slice-value", cmdr.GetIntSliceR("flags.int-slice-value"), "")
 	prd("string-slice-value", cmdr.GetStringSliceR("flags.string-slice-value"), "")
+
+	fmt.Println()
+
+	prd("required", cmdr.GetStringR("flags.required"), "")
+	prd("required2", cmdr.GetStringR("flags.required2"), "")
 
 	return
 }
