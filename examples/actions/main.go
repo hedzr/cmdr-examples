@@ -7,6 +7,7 @@ import (
 	"github.com/hedzr/cmdr"
 	"github.com/hedzr/cmdr-addons/pkg/plugins/trace"
 	cmdr_examples "github.com/hedzr/cmdr-examples"
+	"github.com/hedzr/logex"
 	"gopkg.in/hedzr/errors.v2"
 )
 
@@ -82,7 +83,8 @@ func soundex(root cmdr.OptCmd) {
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
 		PreAction(func(cmd *cmdr.Command, remainArgs []string) (err error) {
-			fmt.Printf("[PRE] DebugMode=%v, TraceMode=%v. InDebugging/IsDebuggerAttached=%v\n", cmdr.GetDebugMode(), trace.IsEnabled(), cmdr.InDebugging())
+			fmt.Printf("[PRE] DebugMode=%v, TraceMode=%v. InDebugging/IsDebuggerAttached=%v\n", 
+				cmdr.GetDebugMode(), logex.GetTraceMode(), cmdr.InDebugging())
 			for ix, s := range remainArgs {
 				fmt.Printf("[PRE] %5d. %s\n", ix, s)
 			}
