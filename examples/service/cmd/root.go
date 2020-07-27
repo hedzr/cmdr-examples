@@ -30,6 +30,20 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 	// root
 
 	root := cmdr.Root(appName, cmdr_examples.Version).
+		AddGlobalPreAction(func(cmd *cmdr.Command, args []string) (err error) {
+			fmt.Println("# global pre-action 1")
+			return
+		}).
+		AddGlobalPreAction(func(cmd *cmdr.Command, args []string) (err error) {
+			fmt.Println("# global pre-action 2")
+			return
+		}).
+		AddGlobalPostAction(func(cmd *cmdr.Command, args []string) {
+			fmt.Println("# global post-action 1")
+		}).
+		AddGlobalPostAction(func(cmd *cmdr.Command, args []string) {
+			fmt.Println("# global post-action 2")
+		}).
 		// Header("fluent - test for cmdr - no version - hedzr").
 		Copyright(copyright, "hedzr").
 		Description(desc, longDesc).

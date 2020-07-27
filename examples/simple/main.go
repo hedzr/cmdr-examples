@@ -14,7 +14,9 @@ func main() {
 }
 
 func Entry() {
-	if err := cmdr.Exec(buildRootCmd(), cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler)); err != nil {
+	if err := cmdr.Exec(buildRootCmd(),
+		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
+	); err != nil {
 		fmt.Printf("error: %+v\n", err)
 	}
 }
