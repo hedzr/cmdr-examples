@@ -113,6 +113,8 @@ github.com/gorilla/websocket v1.4.1 h1:q7AeDBpnBk8AogcD4DSag/Ukw/KV+YhzLj2bP5HvK
 github.com/gorilla/websocket v1.4.1/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/hashicorp/go-version v1.2.0/go.mod h1:fltr4n8CU8Ke44wwGCBoEymUuxUHl09ZGVZPK5anwXA=
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
+github.com/hedzr/cmdr v1.7.0 h1:r0RLYlYrfTzDZfy9TcjQ93NJ7im/3T6EmqBSvfqufpo=
+github.com/hedzr/cmdr v1.7.0/go.mod h1:8pGN/SeMq5hbwFqkOibGOPP0Mm9ctSTZ/VomVamg4dw=
 github.com/hedzr/cmdr-addons v1.1.0 h1:RfpBBLpnV3awoHPvUvmqEdkLSeOU4jinlxvExR+BJMM=
 github.com/hedzr/cmdr-addons v1.1.0/go.mod h1:EljElE+AwPV8+ZrWCTqxPd1LS22i2SMVO12ohE+W5Vg=
 github.com/hedzr/logex v1.2.0 h1:FguEWqQskeckPKSTLXXSl4wVVObYgDJxNrerPJWW8lA=
