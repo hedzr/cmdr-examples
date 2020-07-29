@@ -2,6 +2,8 @@ module github.com/hedzr/cmdr-examples
 
 go 1.14
 
+// replace github.com/hedzr/log => ../log
+
 // replace github.com/hedzr/logex => ../logex
 
 // replace github.com/hedzr/cmdr => ../cmdr
@@ -13,9 +15,9 @@ go 1.14
 require (
 	github.com/Netflix/go-expect v0.0.0-20200312175327-da48e75238e2 // indirect
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.7.0
-	github.com/hedzr/cmdr-addons v1.1.0
-	github.com/hedzr/logex v1.2.0
+	github.com/hedzr/cmdr v1.7.1
+	github.com/hedzr/cmdr-addons v1.1.1
+	github.com/hedzr/logex v1.2.3
 	github.com/hinshun/vt10x v0.0.0-20180809195222-d55458df857c // indirect
 	github.com/kardianos/service v1.0.0
 	github.com/kr/pretty v0.2.0 // indirect
