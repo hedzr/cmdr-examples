@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"github.com/hedzr/cmdr"
 	cmdr_examples "github.com/hedzr/cmdr-examples"
-	"github.com/sirupsen/logrus"
+	"github.com/hedzr/cmdr/tool"
+	"github.com/hedzr/logex/logx/logrus"
 	"gopkg.in/hedzr/errors.v2"
 )
 
@@ -16,9 +17,10 @@ func main() {
 
 func Entry() {
 	if err := cmdr.Exec(buildRootCmd(),
+		cmdr.WithLogx(logrus.New("debug", false, true)),
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
 	); err != nil {
-		logrus.Fatalf("error: %+v", err)
+		cmdr.Logger.Fatalf("error: %+v", err)
 	}
 }
 
@@ -62,7 +64,7 @@ func soundex(root cmdr.OptCmd) {
 		TailPlaceholder("[text1, text2, ...]").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			for ix, s := range args {
-				fmt.Printf("%5d. %s => %s\n", ix, s, cmdr.Soundex(s))
+				fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 			return
 		})

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/hedzr/cmdr"
 	cmdrexamples "github.com/hedzr/cmdr-examples"
+	"github.com/hedzr/cmdr/tool"
 	"log"
 )
 
@@ -33,7 +34,7 @@ func soundex(root cmdr.OptCmd) {
 		TailPlaceholder("[text1, text2, ...]").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			for ix, s := range args {
-				fmt.Printf("%5d. %s => %s\n", ix, s, cmdr.Soundex(s))
+				fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 			return
 		})

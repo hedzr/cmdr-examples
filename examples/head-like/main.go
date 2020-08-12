@@ -38,7 +38,7 @@ func headLike(root cmdr.OptCmd) {
 		Description("how many lines to be processed").
 		HeadLike(true, 0, 1000).
 		AttachTo(root)
-	
+
 	root.Action(func(cmd *cmdr.Command, args []string) (err error) {
 		fmt.Printf("Got --lines: %v\n", cmdr.GetIntR("lines"))
 		return

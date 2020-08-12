@@ -5,15 +5,16 @@ package cmd
 import (
 	"fmt"
 	"github.com/hedzr/cmdr"
-	"github.com/sirupsen/logrus"
+	"github.com/hedzr/logex/logx/logrus"
 	"gopkg.in/hedzr/errors.v2"
 )
 
 func Entry() {
 	if err := cmdr.Exec(buildRootCmd(),
+		cmdr.WithLogx(logrus.New("debug", false, true)),
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
 	); err != nil {
-		logrus.Fatalf("error: %+v", err)
+		cmdr.Logger.Fatalf("error: %+v", err)
 	}
 }
 

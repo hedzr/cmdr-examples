@@ -8,8 +8,7 @@ import (
 )
 
 func main() {
-	if err := cmdr.Exec(buildRootCmd(),
-	); err != nil {
+	if err := cmdr.Exec(buildRootCmd()); err != nil {
 		fmt.Printf("error: %+v\n", err)
 	}
 }

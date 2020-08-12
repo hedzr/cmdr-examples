@@ -7,7 +7,7 @@ import (
 	"github.com/hedzr/cmdr"
 	"github.com/hedzr/cmdr-addons/pkg/plugins/dex"
 	"github.com/hedzr/cmdr-addons/pkg/svr"
-	"github.com/sirupsen/logrus"
+	"github.com/hedzr/logex/logx/logrus"
 	"runtime"
 	"strings"
 )
@@ -27,6 +27,8 @@ func Entry() {
 		// To disable internal commands and flags, uncomment the following codes
 		// cmdr.WithBuiltinCommands(false, false, false, false, false),
 
+		cmdr.WithLogx(logrus.New("debug", false, true)),
+		
 		dex.WithDaemon(svr.NewDaemon(),
 			dex.WithCommandsModifier(modifier),
 			dex.WithLoggerForward(false),
@@ -35,8 +37,8 @@ func Entry() {
 		// server.WithCmdrHook(),
 
 		// integrate with logex library
-		cmdr.WithLogex(cmdr.DebugLevel),
-		cmdr.WithLogexPrefix("logger"),
+		// cmdr.WithLogex(cmdr.DebugLevel),
+		// cmdr.WithLogexPrefix("logger"),
 
 		cmdr.WithPagerEnabled(),
 
@@ -65,7 +67,7 @@ func Entry() {
 		cmdr.WithWatchMainConfigFileToo(true),
 		// cmdr.WithNoWatchConfigFiles(false),
 		cmdr.WithOptionMergeModifying(func(keyPath string, value, oldVal interface{}) {
-			logrus.Debugf("%%-> -> %q: %v -> %v", keyPath, oldVal, value)
+			cmdr.Logger.Debugf("%%-> -> %q: %v -> %v", keyPath, oldVal, value)
 			if strings.HasSuffix(keyPath, ".mqtt.server.stats.enabled") {
 				// mqttlib.FindServer().EnableSysStats(!vxconf.ToBool(value))
 			}
@@ -74,7 +76,7 @@ func Entry() {
 			}
 		}),
 		cmdr.WithOptionModifying(func(keyPath string, value, oldVal interface{}) {
-			logrus.Infof("%%-> -> %q: %v -> %v", keyPath, oldVal, value)
+			cmdr.Logger.Infof("%%-> -> %q: %v -> %v", keyPath, oldVal, value)
 		}),
 
 		// sample.WithSampleCmdrOption(),
@@ -89,7 +91,7 @@ func Entry() {
 		cmdr.WithOnSwitchCharHit(onSwitchCharHit),
 		cmdr.WithOnPassThruCharHit(onPassThruCharHit),
 	); err != nil {
-		logrus.Fatalf("error: %+v", err)
+		cmdr.Logger.Fatalf("error: %+v", err)
 	}
 }
 
@@ -117,9 +119,9 @@ func onUnhandledErrorHandler(err interface{}) {
 	// debug.PrintStack()
 	// pprof.Lookup("goroutine").WriteTo(os.Stdout, 1)
 	if e, ok := err.(error); ok {
-		logrus.Errorf("%+v", e)
+		cmdr.Logger.Errorf("%+v", e)
 	} else {
-		logrus.Errorf("%+v", err)
+		cmdr.Logger.Errorf("%+v", err)
 		dumpStacks()
 	}
 }

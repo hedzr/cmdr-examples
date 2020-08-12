@@ -7,6 +7,7 @@ import (
 	"github.com/hedzr/cmdr"
 	"github.com/hedzr/cmdr-addons/pkg/plugins/trace"
 	cmdr_examples "github.com/hedzr/cmdr-examples"
+	"github.com/hedzr/cmdr/tool"
 	"github.com/hedzr/logex"
 	"gopkg.in/hedzr/errors.v2"
 )
@@ -20,7 +21,6 @@ func Entry() {
 
 		trace.WithTraceEnable(true),
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
-
 	); err != nil {
 		fmt.Printf("error: %+v\n", err)
 	}
@@ -83,7 +83,7 @@ func soundex(root cmdr.OptCmd) {
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
 		PreAction(func(cmd *cmdr.Command, remainArgs []string) (err error) {
-			fmt.Printf("[PRE] DebugMode=%v, TraceMode=%v. InDebugging/IsDebuggerAttached=%v\n", 
+			fmt.Printf("[PRE] DebugMode=%v, TraceMode=%v. InDebugging/IsDebuggerAttached=%v\n",
 				cmdr.GetDebugMode(), logex.GetTraceMode(), cmdr.InDebugging())
 			for ix, s := range remainArgs {
 				fmt.Printf("[PRE] %5d. %s\n", ix, s)
@@ -91,7 +91,7 @@ func soundex(root cmdr.OptCmd) {
 
 			fmt.Printf("[PRE] Debug=%v, Trace=%v\n", cmdr.GetBoolR("debug"), cmdr.GetBoolR("trace"))
 
-			// return nil to be continue, 
+			// return nil to be continue,
 			// return cmdr.ErrShouldBeStopException to stop the following actions without error
 			// return other errors for application purpose
 			return
@@ -99,7 +99,7 @@ func soundex(root cmdr.OptCmd) {
 		Action(func(cmd *cmdr.Command, remainArgs []string) (err error) {
 			for ix, s := range remainArgs {
 				// fmt.Printf("[ACTION] %5d. %s\n", ix, s)
-				fmt.Printf("[ACTION] %5d. %s => %s\n", ix, s, cmdr.Soundex(s))
+				fmt.Printf("[ACTION] %5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 
 			prd("bool", cmdr.GetBoolR("soundex.bool"), "")

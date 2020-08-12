@@ -86,7 +86,7 @@ func MergeMap(maps ...map[string]interface{}) map[string]interface{} {
 	return result
 }
 
-// Copier for depp-clone
+// Copier for deep-clone
 type Copier interface {
 	SetIgnoreNames(ignoreNames ...string) Copier
 	Copy(maps ...map[string]interface{}) (result map[string]interface{}, err error)

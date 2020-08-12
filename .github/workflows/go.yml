@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build
-        run: go build -v ./...
+        run: go build -v -trimpath ./...
 
       - name: Build binaries
         run: make build-ci

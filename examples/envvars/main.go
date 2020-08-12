@@ -7,7 +7,7 @@ import (
 	"github.com/hedzr/cmdr"
 	cmdr_examples "github.com/hedzr/cmdr-examples"
 	"github.com/hedzr/cmdr-examples/examples/envvars/cmd"
-	"github.com/sirupsen/logrus"
+	"github.com/hedzr/logex/logx/logrus"
 	"gopkg.in/hedzr/errors.v2"
 )
 
@@ -17,9 +17,10 @@ func main() {
 
 func Entry() {
 	if err := cmdr.Exec(buildRootCmd(),
+		cmdr.WithLogx(logrus.New("debug", false, true)),
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
 	); err != nil {
-		logrus.Fatalf("error: %+v", err)
+		cmdr.Logger.Fatalf("error: %+v", err)
 	}
 }
 

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/hedzr/cmdr"
 	cmdrexamples "github.com/hedzr/cmdr-examples"
+	"github.com/hedzr/cmdr/tool"
 	"gopkg.in/hedzr/errors.v2"
 	"io/ioutil"
 	"log"
@@ -78,7 +79,7 @@ func mx(root cmdr.OptCmd) {
 			fmt.Println()
 			fmt.Printf("*** test text: %s\n", cmdr.GetStringR("mx-test.test"))
 			fmt.Println()
-			fmt.Printf("> InTesting: args[0]=%v \n", cmdr.SavedOsArgs[0])
+			fmt.Printf("> InTesting: args[0]=%v \n", tool.SavedOsArgs[0])
 			fmt.Println()
 			fmt.Printf("> Used config file: %v\n", cmdr.GetUsedConfigFile())
 			fmt.Printf("> Used config files: %v\n", cmdr.GetUsingConfigFiles())
@@ -106,7 +107,7 @@ func mx(root cmdr.OptCmd) {
 			}
 			return
 		})
-	
+
 	cmdr.NewString().Titles("test", "t").
 		Description("the test text.", "").
 		EnvKeys("COOL", "TEST").
@@ -130,13 +131,13 @@ func mx(root cmdr.OptCmd) {
 		Placeholder("FRUIT").
 		ValidArgs("apple", "banana", "orange").
 		AttachTo(mx)
-	cmdr.NewInt(1).Titles( "head", "hd").
+	cmdr.NewInt(1).Titles("head", "hd").
 		Description("the head lines.", "").
 		Group("").
 		Placeholder("LINES").
 		HeadLike(true, 1, 3000).
 		AttachTo(mx)
-	cmdr.NewBool().Titles( "stdin", "c").
+	cmdr.NewBool().Titles("stdin", "c").
 		Description("read file content from stdin.", "").
 		Group("").
 		AttachTo(mx)

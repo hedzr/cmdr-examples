@@ -4,7 +4,6 @@ package cmd
 
 import (
 	"github.com/hedzr/cmdr"
-	"github.com/sirupsen/logrus"
 )
 
 func modifier(daemonServerCommands *cmdr.Command) *cmdr.Command {
@@ -17,21 +16,21 @@ func modifier(daemonServerCommands *cmdr.Command) *cmdr.Command {
 }
 
 func onAppStart(cmd *cmdr.Command, args []string) (err error) {
-	logrus.Debug("onAppStart")
+	cmdr.Logger.Debugf("onAppStart")
 	return
 }
 
 func onAppExit(cmd *cmdr.Command, args []string) {
-	logrus.Debug("onAppExit")
+	cmdr.Logger.Debugf("onAppExit")
 }
 
 func onServerPostStop(cmd *cmdr.Command, args []string) {
-	logrus.Debug("onServerPostStop")
+	cmdr.Logger.Debugf("onServerPostStop")
 }
 
 // onServerPreStart is earlier than onAppStart.
 func onServerPreStart(cmd *cmdr.Command, args []string) (err error) {
 	// earlierInitLogger() // deprecated by cmdr.WithLogex()
-	logrus.Debug("onServerPreStart")
+	cmdr.Logger.Debugf("onServerPreStart")
 	return
 }

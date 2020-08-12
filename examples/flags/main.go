@@ -6,7 +6,7 @@ import (
 	"github.com/hedzr/cmdr"
 	cmdr_examples "github.com/hedzr/cmdr-examples"
 	"github.com/hedzr/cmdr-examples/examples/flags/cmd"
-	"github.com/sirupsen/logrus"
+	"log"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 
 func Entry() {
 	if err := cmdr.Exec(buildRootCmd()); err != nil {
-		logrus.Fatalf("error: %v", err)
+		log.Fatalf("error: %v", err)
 	}
 }
 

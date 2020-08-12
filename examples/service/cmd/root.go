@@ -6,8 +6,7 @@ import (
 	"fmt"
 	"github.com/hedzr/cmdr"
 	cmdr_examples "github.com/hedzr/cmdr-examples"
-	"github.com/hedzr/logex"
-	"github.com/sirupsen/logrus"
+	"github.com/hedzr/cmdr/tool"
 	"io/ioutil"
 	"log"
 	"os"
@@ -76,7 +75,7 @@ func soundex(root cmdr.OptCmd) {
 		TailPlaceholder("[text1, text2, ...]").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			for ix, s := range args {
-				fmt.Printf("%5d. %s => %s\n", ix, s, cmdr.Soundex(s))
+				fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 			return
 		})
@@ -182,7 +181,7 @@ func mx(root cmdr.OptCmd) {
 			fmt.Println()
 			fmt.Printf("*** test text: %s\n", cmdr.GetStringR("mx-test.test"))
 			fmt.Println()
-			fmt.Printf("> InTesting: args[0]=%v \n", cmdr.SavedOsArgs[0])
+			fmt.Printf("> InTesting: args[0]=%v \n", tool.SavedOsArgs[0])
 			fmt.Println()
 			fmt.Printf("> Used config file: %v\n", cmdr.GetUsedConfigFile())
 			fmt.Printf("> Used config files: %v\n", cmdr.GetUsingConfigFiles())
@@ -191,10 +190,10 @@ func mx(root cmdr.OptCmd) {
 			fmt.Printf("> STDIN MODE: %v \n", cmdr.GetBoolR("mx-test.stdin"))
 			fmt.Println()
 
-			logrus.Debug("debug")
-			logrus.Info("debug")
-			logrus.Warning("debug")
-			logrus.WithField(logex.SKIP, 1).Warningf("dsdsdsds")
+			cmdr.Logger.Debugf("debug")
+			cmdr.Logger.Infof("info")
+			cmdr.Logger.Warnf("warning")
+			// cmdr.Logger.WithField(logex.SKIP, 1).Warningf("dsdsdsds")
 
 			if cmdr.GetBoolR("mx-test.stdin") {
 				fmt.Println("> Type your contents here, press Ctrl-D to end it:")

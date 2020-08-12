@@ -57,7 +57,7 @@ func mx(root cmdr.OptCmd) {
 			fmt.Printf("*** Got fruit (toggle group): %v\n", cmdr.GetString("app.mx-test.fruit"))
 			return
 		})
-	
+
 	cmdr.NewString().Titles("fruit", "fr").
 		Description("the message.", "").
 		Group("").

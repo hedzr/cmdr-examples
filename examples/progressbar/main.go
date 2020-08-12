@@ -7,6 +7,7 @@ import (
 	"github.com/hedzr/cmdr"
 	cmdrexamples "github.com/hedzr/cmdr-examples"
 	"github.com/hedzr/cmdr-examples/examples/progressbar/pbar"
+	"github.com/hedzr/cmdr/tool"
 	"math/rand"
 	"strings"
 	"time"
@@ -50,7 +51,7 @@ func pBar(root cmdr.OptCmd) {
 
 func pBar1(cmd *cmdr.Command, args []string) (err error) {
 	for ix, s := range args {
-		fmt.Printf("%5d. %s => %s\n", ix, s, cmdr.Soundex(s))
+		fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 	}
 	fmt.Println(strings.Repeat("\n", rand.Intn(7)))
 
@@ -77,7 +78,7 @@ func pBar1(cmd *cmdr.Command, args []string) (err error) {
 func pBar2(cmd *cmdr.Command, args []string) (err error) {
 
 	for ix, s := range args {
-		fmt.Printf("%5d. %s => %s\n", ix, s, cmdr.Soundex(s))
+		fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 	}
 
 	fmt.Println(strings.Repeat("\n", rand.Intn(7)))
