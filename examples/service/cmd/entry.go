@@ -28,7 +28,7 @@ func Entry() {
 		// cmdr.WithBuiltinCommands(false, false, false, false, false),
 
 		cmdr.WithLogx(logrus.New("debug", false, true)),
-		
+
 		dex.WithDaemon(svr.NewDaemon(),
 			dex.WithCommandsModifier(modifier),
 			dex.WithLoggerForward(false),
