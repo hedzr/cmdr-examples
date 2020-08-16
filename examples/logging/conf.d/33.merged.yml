@@ -1,0 +1,4 @@
+
+app:
+  logging:
+    updated: true      # bool item

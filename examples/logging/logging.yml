@@ -1,0 +1,35 @@
+#
+#
+#
+#
+#
+
+app:
+  logging:
+    bool: true
+    string: string
+    int: 9
+
+  # autoconfig for logger/logging-system.
+  # cmdr will load this configuration and initialize the logging
+  # system via build.New(loggerConfig).
+  # see also:
+  #   cmdr.Logger,
+  #   log.LoggerConfig           (hedzr/log)
+  #   build.New(loggerConfig)    (hedzr/logex/build)
+  logger:
+    # The field 'level' will be reset to "debug" while the app
+    # is started up within a debugger
+    # available levels are:
+    #   "disable"/"off", "panic", "fatal", "error", "warn",
+    #   "info", "debug", "trace"
+    level:  info
+    format: text                  # text, json, logfmt, ...
+    backend: sugar                # zap, sugar(sugared-zap) or logrus, std, off
+    target: console               # console, file
+    directory: /var/log/$APPNAME
+
+
+
+
+
