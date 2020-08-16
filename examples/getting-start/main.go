@@ -7,12 +7,14 @@ import (
 	"github.com/hedzr/cmdr"
 	cmdrexamples "github.com/hedzr/cmdr-examples"
 	"github.com/hedzr/cmdr/tool"
-	"log"
+	"github.com/hedzr/log"
 )
 
 func main() {
-	if err := cmdr.Exec(buildRootCmd()); err != nil {
-		log.Printf("error: %+v\n", err)
+	if err := cmdr.Exec(buildRootCmd(),
+		cmdr.WithLogx(log.NewStdLogger()),
+	); err != nil {
+		cmdr.Logger.Printf("error: %+v\n", err)
 	}
 }
 
