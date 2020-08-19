@@ -175,6 +175,10 @@ build-freebsd:
 build-riscv:
 	@-$(MAKE) -s go-build-task os=linux goarchset=riscv64
 
+## build-short: build for subcommands and flags
+build-short:
+	@-$(MAKE) -s go-build-task os=darwin goarchset=amd64 MAIN_APPS='flags subcommands'
+
 go-build-task:
 	@echo "  >  Building $(os)/$(goarchset) binary..."
 	@#echo "  >  LDFLAGS = $(LDFLAGS)"
