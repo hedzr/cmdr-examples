@@ -6,7 +6,7 @@ go 1.14
 
 // replace github.com/hedzr/logex => ../logex
 
-//replace github.com/hedzr/cmdr => ../cmdr
+// replace github.com/hedzr/cmdr => ../cmdr
 
 // replace github.com/hedzr/cmdr-addons => ../cmdr-addons
 
@@ -26,6 +26,6 @@ require (
 	github.com/ttacon/chalk v0.0.0-20160626202418-22c06c80ed31
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
-	gopkg.in/hedzr/errors.v2 v2.0.12
+	gopkg.in/hedzr/errors.v2 v2.1.0
 	gopkg.in/yaml.v2 v2.3.0
 )
