@@ -178,6 +178,7 @@ build-riscv:
 ## build-short: build for subcommands and flags
 build-short:
 	@-$(MAKE) -s go-build-task os=darwin goarchset=amd64 MAIN_APPS='flags subcommands'
+	@-$(MAKE) -s go-build-task os=linux goarchset=amd64 MAIN_APPS='flags subcommands'
 
 go-build-task:
 	@echo "  >  Building $(os)/$(goarchset) binary..."
