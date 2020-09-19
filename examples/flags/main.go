@@ -39,6 +39,8 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 	rootCmd = root.RootCommand()
 
 	cmdr.NewBool().
+		Titles("test-bool", "tb").
+		Description("test-bool flag").
 		OnSet(func(keyPath string, value interface{}) {
 			cmdr.Logger.Debugf("-> -> onSet: %q <- %v", "care", value)
 		}).
