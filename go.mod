@@ -6,7 +6,7 @@ go 1.14
 
 // replace github.com/hedzr/logex => ../logex
 
-// replace github.com/hedzr/cmdr => ../cmdr
+replace github.com/hedzr/cmdr => ../cmdr
 
 // replace github.com/hedzr/cmdr-addons => ../cmdr-addons
 
@@ -14,10 +14,10 @@ go 1.14
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.7.11
-	github.com/hedzr/cmdr-addons v1.7.11
-	github.com/hedzr/log v0.1.17
-	github.com/hedzr/logex v1.2.9
+	github.com/hedzr/cmdr v1.7.21
+	github.com/hedzr/cmdr-addons v1.7.21
+	github.com/hedzr/log v0.2.0
+	github.com/hedzr/logex v1.2.12
 	github.com/kardianos/service v1.1.0
 	github.com/nsf/termbox-go v0.0.0-20200418040025-38ba6e5628f1
 	github.com/sirupsen/logrus v1.6.0
