@@ -15,9 +15,7 @@ func main() {
 }
 
 func Entry() {
-	logConfig := log.NewLoggerConfig()
-	logConfig.Backend = "logrus"
-	logConfig.Level = "debug"
+	logConfig := log.NewLoggerConfigWith(true, "logrus", "debug")
 	if err := cmdr.Exec(buildRootCmd(),
 		cmdr.WithLogx(build.New(logConfig)),
 		cmdr.WithOptionMergeModifying(func(keyPath string, value, oldVal interface{}) {

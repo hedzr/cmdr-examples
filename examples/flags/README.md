@@ -91,3 +91,27 @@ The expected result:
 ```
 
 
+
+## The New Features for `cmdr`
+
+### Pluggable Extensions
+
+Copy `<project-dir>/ci/local/share/flags` as `$HOME/.local/share/flags`, and run:
+
+```bash
+cp -R ./ci/local/share/flags $HOME/.local/share/
+go run ./examples/flags
+```
+
+> 1. For your final deploy, extensions (shell scripts, elf binary, ...) should be put into `$HOME/.local/share/<appname>/ext/`, with linux executable permissions (`chmod +x`.
+>
+> 2. For debugging in developing, just put the extensions into `<project-dir>/ci/local/share/<appname>/ext` and `cmdr` will find out it.
+
+And **three extensions** will be plugged into Sub-commands group **`Extensions`**:
+
+![image-20200920111517653](https://i.loli.net/2020/09/20/x5D2ZoFlM7HcOnK.png)
+
+And of course it can be invoked:
+
+![image-20200920111706101](https://i.loli.net/2020/09/20/6qwftmyeWcJ4gbG.png)
+
