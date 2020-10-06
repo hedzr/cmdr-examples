@@ -12,19 +12,21 @@ go 1.14
 
 // replace github.com/kardianos/service => ../../kardianos/service
 
+// replace github.com/hedzr/cmdr-examples/cmdr-gen => ./cmdr-gen
+
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.7.25
-	github.com/hedzr/cmdr-addons v1.7.25
-	github.com/hedzr/log v0.2.2
-	github.com/hedzr/logex v1.2.15
+	github.com/hedzr/cmdr v1.7.27
+	github.com/hedzr/cmdr-addons v1.7.28
+	github.com/hedzr/log v0.2.3
+	github.com/hedzr/logex v1.2.17
 	github.com/kardianos/service v1.1.0
 	github.com/nsf/termbox-go v0.0.0-20200418040025-38ba6e5628f1
-	github.com/sirupsen/logrus v1.6.0
+	github.com/sirupsen/logrus v1.7.0
 	github.com/superhawk610/bar v0.0.0-20190614064228-4fbf44d086fd
 	github.com/superhawk610/terminal v0.0.0-20200123193603-cbc69427a94a // indirect
 	github.com/ttacon/chalk v0.0.0-20160626202418-22c06c80ed31
-	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980
+	golang.org/x/sys v0.0.0-20200929083018-4d22bbb62b3c
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
 	gopkg.in/hedzr/errors.v2 v2.1.1
 	gopkg.in/yaml.v2 v2.3.0
