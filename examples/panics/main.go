@@ -17,11 +17,11 @@ func main() {
 
 func Entry() {
 	if err := cmdr.Exec(buildRootCmd(),
-		
+
 		cmdr.WithLogx(logrus.New("debug", false, true)),
 		// Or:
 		// cmdr.WithLogx(build.New(logConfig)),
-		
+
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
 	); err != nil {
 		cmdr.Logger.Fatalf("error: %+v", err)

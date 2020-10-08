@@ -18,7 +18,6 @@ func main() {
 
 func Entry() {
 	if err := cmdr.Exec(buildRootCmd(),
-
 		trace.WithTraceEnable(true),
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
 	); err != nil {

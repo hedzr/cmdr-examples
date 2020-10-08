@@ -5,23 +5,18 @@ package cmd
 import (
 	"fmt"
 	"github.com/hedzr/cmdr"
-	"github.com/hedzr/log"
 	"github.com/hedzr/logex/build"
 	"gopkg.in/hedzr/errors.v2"
 )
 
 func Entry() {
-	logConfig := log.NewLoggerConfig()
-	logConfig.Level = "debug"
-	logConfig.Backend = "logrus"
-	
 	if err := cmdr.Exec(buildRootCmd(),
-		cmdr.WithLogx(build.New(logConfig)),
+		cmdr.WithLogx(build.New(cmdr.NewLoggerConfigWith(true, "logrus", "debug"))),
 		cmdr.WithUnhandledErrorHandler(onUnhandledErrorHandler),
 	); err != nil {
 		cmdr.Logger.Fatalf("error: %+v", err)
 	}
-	
+
 	cmdr.Logger.Debugf("hello")
 }
 

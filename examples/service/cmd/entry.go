@@ -7,7 +7,7 @@ import (
 	"github.com/hedzr/cmdr"
 	"github.com/hedzr/cmdr-addons/pkg/plugins/dex"
 	"github.com/hedzr/cmdr-addons/pkg/svr"
-	"github.com/hedzr/logex/logx/logrus"
+	"github.com/hedzr/logex/build"
 	"runtime"
 	"strings"
 )
@@ -27,7 +27,7 @@ func Entry() {
 		// To disable internal commands and flags, uncomment the following codes
 		// cmdr.WithBuiltinCommands(false, false, false, false, false),
 
-		cmdr.WithLogx(logrus.New("debug", false, true)),
+		cmdr.WithLogx(build.New(cmdr.NewLoggerConfigWith(true, "logrus", "debug"))),
 
 		dex.WithDaemon(svr.NewDaemon(),
 			dex.WithCommandsModifier(modifier),
