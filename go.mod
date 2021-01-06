@@ -16,10 +16,10 @@ go 1.14
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.7.40
-	github.com/hedzr/cmdr-addons v1.7.40
-	github.com/hedzr/log v0.3.8
-	github.com/hedzr/logex v1.3.8
+	github.com/hedzr/cmdr v1.7.41
+	github.com/hedzr/cmdr-addons v1.7.41
+	github.com/hedzr/log v0.3.9
+	github.com/hedzr/logex v1.3.9
 	github.com/kardianos/service v1.1.0
 	github.com/nsf/termbox-go v0.0.0-20190121233118-02980233997d
 	github.com/sirupsen/logrus v1.7.0
