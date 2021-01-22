@@ -36,7 +36,7 @@ jobs:
             ${{ runner.os }}-go-
       - name: Test
         run: |
-          go mod download
+          GOSUMDB=off go mod download
           go build -v -o main ./examples/flags
           rm main
           go test ./...
@@ -123,6 +123,7 @@ jobs:
 
       - name: Build
         run: |
+          export GOSUMDB=off
           export GIT_REVISION="$(git rev-parse --short HEAD)"
           export GOVERSION="$(go version)"
           export BUILDTIME="$(date -u '+%Y-%m-%d_%H-%M-%S')"
