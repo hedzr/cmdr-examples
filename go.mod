@@ -16,17 +16,17 @@ go 1.14
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.7.46
-	github.com/hedzr/cmdr-addons v1.7.46
-	github.com/hedzr/log v0.3.12
-	github.com/hedzr/logex v1.3.12
+	github.com/hedzr/cmdr v1.8.0
+	github.com/hedzr/cmdr-addons v1.8.0
+	github.com/hedzr/log v0.3.13
+	github.com/hedzr/logex v1.3.13
 	github.com/kardianos/service v1.2.0
-	github.com/nsf/termbox-go v0.0.0-20201124104050-ed494de23a00
-	github.com/sirupsen/logrus v1.7.0
+	github.com/nsf/termbox-go v1.1.0
+	github.com/sirupsen/logrus v1.8.1
 	github.com/superhawk610/bar v0.0.2
 	github.com/superhawk610/terminal v0.1.0 // indirect
-	github.com/ttacon/chalk v0.0.0-20160626202418-22c06c80ed31
-	golang.org/x/sys v0.0.0-20201015000850-e3ed0017c211
+	github.com/ttacon/chalk v0.0.0-20140724125006-76b3c8b611de
+	golang.org/x/sys v0.0.0-20210225134936-a50acf3fe073
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
 	gopkg.in/hedzr/errors.v2 v2.1.3
 	gopkg.in/yaml.v2 v2.4.0
