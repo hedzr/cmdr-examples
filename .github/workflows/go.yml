@@ -39,7 +39,7 @@ jobs:
           GOSUMDB=off go mod download
           go build -v -o main ./examples/flags
           rm main
-          go test ./...
+          go test -v ./...
 
   coverage:
     needs: test
