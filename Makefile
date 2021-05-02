@@ -272,6 +272,7 @@ go-build:
 	  ls -la $(LS_OPT) ./ci/local/share/fluent/addons/demo.so; fi
 	# go build -o $(GOBIN)/$(APPNAME) $(GOFILES)
 	# chmod +x $(GOBIN)/*
+	@echo " - END"
 
 go-generate:
 	@echo "  >  Generating dependency files ('$(generate)') ..."
