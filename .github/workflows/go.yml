@@ -140,14 +140,21 @@ jobs:
               GOVERSION: $GOVERSION
               BUILDTIME: $BUILDTIME
           EOF
-          for app in actions configfile envvars flags getting-start \
+          for app in actions configfile editor-tool envvars flags getting-start \
                        golang-style head-like interactive-prompt kilo-bytes \
-                       logging old-style panics progressbar service shell-mode \
+                       logging panics progressbar service shell-mode \
                        simple subcommands toggle-group tui-demo valid-args \
                        wget-cover ; do
           for dir in ./examples; do
-            for GOOS in windows linux darwin; do
+            for GOOS in windows linux; do
               for GOARCH in amd64; do
+                suf=; if [[ $GOOS == "windows" ]]; then suf=".exe"; fi
+                go build -v -ldflags "$LDFLAGS" -o ./bin/$app-$GOOS-$GOARCH$suf ./$dir/$app/
+                gzip -f ./bin/$app-$GOOS-$GOARCH$suf
+              done
+            done
+            for GOOS in darwin; do
+              for GOARCH in amd64 arm64; do
                 suf=; if [[ $GOOS == "windows" ]]; then suf=".exe"; fi
                 go build -v -ldflags "$LDFLAGS" -o ./bin/$app-$GOOS-$GOARCH$suf ./$dir/$app/
                 gzip -f ./bin/$app-$GOOS-$GOARCH$suf
