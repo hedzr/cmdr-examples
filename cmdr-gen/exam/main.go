@@ -1,8 +1,8 @@
 // Copyright © 2020 Hedzr Yeh.
 
-//go:generate cmdr-gen app -n cli-exam
+// go:generate cmdr-gen app -n cli-exam
 
-//go:generate cmdr-gen flag -d '
+// go:generate cmdr-gen flag -d '
 // gender: [male|female]
 // '
 
