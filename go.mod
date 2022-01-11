@@ -17,7 +17,7 @@ go 1.14
 require (
 	github.com/gizak/termui/v3 v3.1.0
 	github.com/hedzr/cmdr v1.9.8
-	github.com/hedzr/cmdr-addons v1.9.8
+	github.com/hedzr/cmdr-addons v1.9.8-p3
 	github.com/hedzr/log v1.5.0
 	github.com/hedzr/logex v1.5.0
 	github.com/kardianos/service v1.2.1
