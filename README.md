@@ -7,7 +7,19 @@ see also [`cmdr`](https://github.com/hedzr/cmdr), [`cmdr-addons`](https://github
 
 ## Status
 
-WIP
+
+### v1.9.8-p3 and newer
+
+golang 1.15+ required.
+
+> **Causes**:
+> 1. golang.org/x/net/http2 used errors.Is()
+> 2. golang.org/x/net/http2 used os.ErrDeadlineExceeded
+
+Updates:
+1. removed iris/v12 [`import "github.com/hedzr/cmdr-addons v1.9.8-p3"`]
+2. seems ci not good for go1.14
+
 
 
 ## Index
@@ -23,9 +35,6 @@ new service app with [`dex` plugin](https://github.com/hedzr/cmdr-addons/tree/ma
 
 <https://github.com/hedzr/cmdr-examples/tree/master/examples/service>
 
-### NOTE
-
-`kataras/iris/v12` can't be built on go 1.12 or lower.
 
 
 
