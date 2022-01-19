@@ -8,13 +8,17 @@ see also [`cmdr`](https://github.com/hedzr/cmdr), [`cmdr-addons`](https://github
 ## Status
 
 
-### v1.9.8-p3 and newer
+### v1.9.9 and newer
 
-golang 1.15+ required.
+golang 1.16+ required.
 
 > **Causes**:
 > 1. golang.org/x/net/http2 used errors.Is()
 > 2. golang.org/x/net/http2 used os.ErrDeadlineExceeded
+> 
+> Since cmdr-addon v1.9.8-p3
+> 
+> Since cmdr v1.9.9 and later
 
 Updates:
 1. removed iris/v12 [`import "github.com/hedzr/cmdr-addons v1.9.8-p3"`]
