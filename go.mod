@@ -16,10 +16,10 @@ go 1.16
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.9.9
-	github.com/hedzr/cmdr-addons v1.9.9
-	github.com/hedzr/log v1.5.0
-	github.com/hedzr/logex v1.5.1
+	github.com/hedzr/cmdr v1.10.0
+	github.com/hedzr/cmdr-addons v1.10.0
+	github.com/hedzr/log v1.5.3
+	github.com/hedzr/logex v1.5.3
 	github.com/kardianos/service v1.2.1
 	github.com/nsf/termbox-go v1.1.1
 	github.com/sirupsen/logrus v1.8.1
@@ -29,5 +29,5 @@ require (
 	golang.org/x/sys v0.0.0-20211103235746-7861aae1554b
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
 	gopkg.in/hedzr/errors.v2 v2.1.5
-	gopkg.in/yaml.v2 v2.3.0
+	gopkg.in/yaml.v2 v2.4.0
 )
