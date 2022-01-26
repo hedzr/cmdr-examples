@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/hedzr/cmdr"
+	"github.com/hedzr/log/dir"
 	"go/ast"
 	"go/build"
 	"go/format"
@@ -34,7 +35,7 @@ func genApp(cmd *cmdr.Command, args []string) (err error) {
 	prflag("processing-file-lineno")
 
 	goFile := cmdr.GetStringR("application.processing-filename")
-	goFilePath := path.Join(cmdr.GetCurrentDir(), goFile)
+	goFilePath := path.Join(dir.GetCurrentDir(), goFile)
 	goPackage := cmdr.GetStringR("application.package")
 	goModName := goPackage
 	if goModName == "main" {
