@@ -6,16 +6,24 @@ package main
 
 import (
 	"github.com/hedzr/cmdr"
-	"log"
+	"github.com/hedzr/log"
+	"github.com/hedzr/logex/build"
+)
+
+const (
+	defaultTraceEnabled  = true
+	defaultDebugEnabled  = false
+	defaultLoggerLevel   = "info"
+	defaultLoggerBackend = "logrus"
 )
 
 func main() {
 	if err := cmdr.Exec(buildRootCmd(),
 		// To disable internal commands and flags, uncomment the following codes
 		cmdr.WithBuiltinCommands(false, false, false, false, true),
-		// daemon.WithDaemon(svr.NewDaemon(), nil, nil, nil),
-		cmdr.WithLogex(cmdr.DebugLevel),
-		cmdr.WithLogexPrefix("logger"),
+		cmdr.WithLogx(build.New(build.NewLoggerConfigWith(
+			defaultDebugEnabled, defaultLoggerBackend, defaultLoggerLevel,
+			log.WithTimestamp(true, "")))),
 		// cmdr.WithHelpTabStop(40),
 		// cmdr.WithNoColor(true),
 	); err != nil {
