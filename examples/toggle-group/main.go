@@ -33,7 +33,7 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 func tg(root cmdr.OptCmd) {
 	// toggle-group
 
-	c := root.NewSubCommand("toggle-group", "tg").
+	c := cmdr.NewSubCmd().Titles("toggle-group", "tg").
 		Description("soundex test").
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
@@ -46,7 +46,8 @@ func tg(root cmdr.OptCmd) {
 			fmt.Printf("Flag 'std' = %v\n", cmdr.GetBoolR("toggle-group.std"))
 			fmt.Printf("Toggle Group 'mux-type' = %v\n", selectedMuxType)
 			return
-		})
+		}).
+		AttachTo(root)
 
 	cmdr.NewBool(false).Titles("echo", "echo").Description("using 'echo' mux").ToggleGroup("mux-type").Group("Mux").AttachTo(c)
 	cmdr.NewBool(false).Titles("gin", "gin").Description("using 'gin' mux").ToggleGroup("mux-type").Group("Mux").AttachTo(c)

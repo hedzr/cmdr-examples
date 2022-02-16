@@ -41,43 +41,51 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 		Examples(examples)
 	rootCmd = root.RootCommand()
 
-	panicTest(root)
-	kbPrint(root)
+	cmdrPanic(root)
+	cmdrKbPrint(root)
 
 	return
 }
 
-func panicTest(root cmdr.OptCmd) {
+func cmdrPanic(root cmdr.OptCmd) {
 	// panic test
 
-	pa := root.NewSubCommand("panic-test", "pa").
+	pa := cmdr.NewSubCmd().
+		Titles("panic-test", "pa").
 		Description("test panic inside cmdr actions", "").
-		Group("Test")
+		Group("Test").
+		AttachTo(root)
 
 	val := 9
 	zeroVal := zero
 
-	pa.NewSubCommand("division-by-zero", "dz").
+	cmdr.NewSubCmd().
+		Titles("division-by-zero", "dz").
 		Description("").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			fmt.Println(val / zeroVal)
 			return
-		})
+		}).
+		AttachTo(pa)
 
-	pa.NewSubCommand("panic", "pa").
+	cmdr.NewSubCmd().
+		Titles("panic", "pa").
 		Description("").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			panic(9)
 			return
-		})
+		}).
+		AttachTo(pa)
+
 }
 
-func kbPrint(root cmdr.OptCmd) {
+func cmdrKbPrint(root cmdr.OptCmd) {
+
 	// kb-print
 
-	kb := root.NewSubCommand("kb-print", "kb").
+	kb := cmdr.NewSubCmd().Titles("kb-print", "kb").
 		Description("kilobytes test", "test kibibytes' input,\nverbose long descriptions here.").
 		Group("Test").
 		Examples(`
@@ -90,18 +98,15 @@ $ {{.AppName}} kb --size 1g
 		`).
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			fmt.Printf("Got size: %v (literal: %v)\n\n", cmdr.GetKibibytesR("kb-print.size"), cmdr.GetStringR("kb-print.size"))
-			fmt.Printf("Got kilo: %v (literal: %v)\n\n", cmdr.GetKibibytesR("kb-print.kilo"), cmdr.GetStringR("kb-print.kilo"))
 			return
-		})
+		}).
+		AttachTo(root)
 
-	kb.NewFlagV("1k", "size", "s").
+	cmdr.NewString("1k").Titles("size", "s").
 		Description("max message size. Valid formats: 2k, 2kb, 2kB, 2KB. Suffixes: k, m, g, t, p, e.", "").
-		Group("")
+		Group("").
+		AttachTo(kb)
 
-	cmdr.NewString("1k").
-		Titles("kilo", "k").
-		Description("message size. Valid formats: 2k, 2kb, 2kB, 2KB. Suffixes: k, m, g, t, p, e.", "").
-		Group("").AttachTo(kb)
 }
 
 const (

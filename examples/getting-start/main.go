@@ -30,7 +30,7 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 }
 
 func soundex(root cmdr.OptCmd) {
-	root.NewSubCommand("soundex", "snd", "sndx", "sound").
+	cmdr.NewSubCmd().Titles("soundex", "snd", "sndx", "sound").
 		Description("soundex test").
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
@@ -39,7 +39,7 @@ func soundex(root cmdr.OptCmd) {
 				fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 			return
-		})
+		}).AttachTo(root)
 }
 
 const (

@@ -62,7 +62,7 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 func soundex(root cmdr.OptCmd) {
 	// soundex
 
-	root.NewSubCommand("soundex", "snd", "sndx", "sound").
+	cmdr.NewSubCmd().Titles("soundex", "snd", "sndx", "sound").
 		Description("soundex test").
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
@@ -71,34 +71,36 @@ func soundex(root cmdr.OptCmd) {
 				fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 			return
-		})
+		}).
+		AttachTo(root)
 }
 
 func panicTest(root cmdr.OptCmd) {
 	// panic test
 
-	pa := root.NewSubCommand("panic-test", "pa").
+	pa := cmdr.NewSubCmd().Titles("panic-test", "pa").
 		Description("test panic inside cmdr actions", "").
-		Group("Test")
+		Group("Test").
+		AttachTo(root)
 
 	val := 9
 	zeroVal := zero
 
-	pa.NewSubCommand("division-by-zero", "dz").
+	cmdr.NewSubCmd().Titles("division-by-zero", "dz").
 		Description("").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			fmt.Println(val / zeroVal)
 			return
-		})
+		}).AttachTo(pa)
 
-	pa.NewSubCommand("panic", "pa").
+	cmdr.NewSubCmd().Titles("panic", "pa").
 		Description("").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			panic(9)
 			return
-		})
+		}).AttachTo(pa)
 }
 
 const (

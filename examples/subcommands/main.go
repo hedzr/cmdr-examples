@@ -38,48 +38,57 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 func grouped(root cmdr.OptCmd) {
 	// grouped sub-commands
 
-	d1 := root.NewSubCommand("sorted", "sorted").
+	d1 := cmdr.NewSubCmd().Titles("sorted", "sorted").
 		Description("[grouped] Tags operations").
-		Group("Grouped")
+		Group("Grouped").
+		AttachTo(root)
 
-	d1.NewSubCommand("demo-1", "d1").
+	cmdr.NewSubCmd().Titles("demo-1", "d1").
 		Description("[sub][sub] check-in sub").
-		Group("g001.Group 1")
-	d1.NewSubCommand("demo-2", "d2").
+		Group("g001.Group 1").
+		AttachTo(d1)
+	cmdr.NewSubCmd().Titles("demo-2", "d2").
 		Description("[sub][sub] check-in sub").
-		Group("g001.Group 1")
+		Group("g001.Group 1").
+		AttachTo(d1)
 
-	d1.NewSubCommand("cmd-1", "c1").
+	cmdr.NewSubCmd().Titles("cmd-1", "c1").
 		Description("[sub][sub] check-in sub").
-		Group("gz99.Group 99")
-	d1.NewSubCommand("cmd-2", "c2").
+		Group("gz99.Group 99").
+		AttachTo(d1)
+	cmdr.NewSubCmd().Titles("cmd-2", "c2").
 		Description("[sub][sub] check-in sub").
-		Group("gz99.Group 99")
-	d1.NewSubCommand("cmd-3", "c3").
+		Group("gz99.Group 99").
+		AttachTo(d1)
+	cmdr.NewSubCmd().Titles("cmd-3", "c3").
 		Description("[sub][sub] check-in sub").
-		Group("gz99.Group 99")
+		Group("gz99.Group 99").
+		AttachTo(d1)
 
 }
 
 func nested(root cmdr.OptCmd) {
 	// nested sub-commands
 
-	d1 := root.NewSubCommand("demo-1", "d1").
+	d1 := cmdr.NewSubCmd().Titles("demo-1", "d1").
 		Description("[sub] check-in sub").
-		Group("Nested")
-	d2 := d1.NewSubCommand("demo-2", "d2").
+		Group("Nested").
+		AttachTo(root)
+	d2 := cmdr.NewSubCmd().Titles("demo-2", "d2").
 		Description("[sub][sub] check-in sub").
-		Group("Nested")
-	d2.NewSubCommand("demo-3", "d3").
+		Group("Nested").
+		AttachTo(d1)
+	cmdr.NewSubCmd().Titles("demo-3", "d3").
 		Description("[sub][sub][sub] check-in sub").
-		Group("Nested")
+		Group("Nested").
+		AttachTo(d2)
 
 }
 
 func soundex(root cmdr.OptCmd) {
 	// soundex
 
-	root.NewSubCommand("soundex", "snd", "sndx", "sound").
+	cmdr.NewSubCmd().Titles("soundex", "snd", "sndx", "sound").
 		Description("soundex test").
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
@@ -88,34 +97,38 @@ func soundex(root cmdr.OptCmd) {
 				fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 			return
-		})
+		}).
+		AttachTo(root)
 }
 
 func panicTest(root cmdr.OptCmd) {
 	// panic test
 
-	pa := root.NewSubCommand("panic-test", "pa").
+	pa := cmdr.NewSubCmd().Titles("panic-test", "pa").
 		Description("test panic inside cmdr actions", "").
-		Group("Test")
+		Group("Test").
+		AttachTo(root)
 
 	val := 9
 	zeroVal := zero
 
-	pa.NewSubCommand("division-by-zero", "dz").
+	cmdr.NewSubCmd().Titles("division-by-zero", "dz").
 		Description("").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			fmt.Println(val / zeroVal)
 			return
-		})
+		}).
+		AttachTo(pa)
 
-	pa.NewSubCommand("panic", "pa").
+	cmdr.NewSubCmd().Titles("panic", "pa").
 		Description("").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			panic(9)
 			return
-		})
+		}).
+		AttachTo(pa)
 }
 
 const (

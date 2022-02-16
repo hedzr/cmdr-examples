@@ -57,10 +57,11 @@ func gen(root cmdr.OptCmd) {
 func genNewApp(root cmdr.OptCmd) {
 	var cc cmdr.OptCmd
 
-	cc = root.NewSubCommand("application", "a", "app").
+	cc = cmdr.NewSubCmd().Titles("application", "a", "app").
 		Description("create an app", "test new features,\nverbose long descriptions here.").
 		Group("Test").
-		Action(genApp)
+		Action(genApp).
+		AttachTo(root)
 
 	cmdr.NewString("example").
 		Titles("module-name", "mn").
@@ -93,12 +94,13 @@ func genNewCommand(root cmdr.OptCmd) {
 
 	var cc cmdr.OptCmd
 
-	cc = root.NewSubCommand("flag", "f").
+	cc = cmdr.NewSubCmd().Titles("flag", "f").
 		Description("create a flag from YAML definition", "test new features,\nverbose long descriptions here.").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			return
-		})
+		}).
+		AttachTo(root)
 
 	cmdr.NewString().
 		Titles("define", "d").
@@ -110,12 +112,13 @@ func genNewFlag(root cmdr.OptCmd) {
 
 	var cc cmdr.OptCmd
 
-	cc = root.NewSubCommand("command", "c", "cmd").
+	cc = cmdr.NewSubCmd().Titles("command", "c", "cmd").
 		Description("create a command from YAML definition", "test new features,\nverbose long descriptions here.").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			return
-		})
+		}).
+		AttachTo(root)
 
 	cmdr.NewString().
 		Titles("define", "d").
@@ -127,7 +130,7 @@ func genNewFlag(root cmdr.OptCmd) {
 func mx(root cmdr.OptCmd) {
 	// mx-test
 
-	mx := root.NewSubCommand("mx-test", "mx").
+	mx := cmdr.NewSubCmd().Titles("mx-test", "mx").
 		Description("test new features", "test new features,\nverbose long descriptions here.").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
@@ -179,7 +182,8 @@ func mx(root cmdr.OptCmd) {
 				fmt.Println()
 			}
 			return
-		})
+		}).
+		AttachTo(root)
 
 	cmdr.NewString().Titles("test", "t").
 		Description("the test text.", "").

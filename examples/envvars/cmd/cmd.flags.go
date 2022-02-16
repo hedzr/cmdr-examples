@@ -14,10 +14,11 @@ func prd(key string, val interface{}, format string, params ...interface{}) {
 func AddFlags(root cmdr.OptCmd) {
 	// tags sub-commands
 
-	parent := root.NewSubCommand("flags", "f").
+	parent := cmdr.NewSubCmd().Titles("flags", "f").
 		Description("flags demo", "").
 		Group("").
-		Action(flagsAction)
+		Action(flagsAction).
+		AttachTo(root)
 
 	cmdr.NewBool(false).
 		Titles("bool", "b").

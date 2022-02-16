@@ -53,16 +53,49 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 		Description("Enables the unhandled exception handler?").
 		AttachTo(root)
 
-	soundex(root)
-	panicTest(root)
+	cmdrPanic(root)
+	cmdrSoundex(root)
 
 	return
 }
 
-func soundex(root cmdr.OptCmd) {
-	// soundex
+func cmdrPanic(root cmdr.OptCmd) {
+	// panic test
 
-	root.NewSubCommand("soundex", "snd", "sndx", "sound").
+	pa := cmdr.NewSubCmd().
+		Titles("panic-test", "pa").
+		Description("test panic inside cmdr actions", "").
+		Group("Test").
+		AttachTo(root)
+
+	val := 9
+	zeroVal := zero
+
+	cmdr.NewSubCmd().
+		Titles("division-by-zero", "dz").
+		Description("").
+		Group("Test").
+		Action(func(cmd *cmdr.Command, args []string) (err error) {
+			fmt.Println(val / zeroVal)
+			return
+		}).
+		AttachTo(pa)
+
+	cmdr.NewSubCmd().
+		Titles("panic", "pa").
+		Description("").
+		Group("Test").
+		Action(func(cmd *cmdr.Command, args []string) (err error) {
+			panic(9)
+			return
+		}).
+		AttachTo(pa)
+
+}
+
+func cmdrSoundex(root cmdr.OptCmd) {
+
+	cmdr.NewSubCmd().Titles("soundex", "snd", "sndx", "sound").
 		Description("soundex test").
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
@@ -71,34 +104,9 @@ func soundex(root cmdr.OptCmd) {
 				fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 			return
-		})
-}
+		}).
+		AttachTo(root)
 
-func panicTest(root cmdr.OptCmd) {
-	// panic test
-
-	pa := root.NewSubCommand("panic-test", "pa").
-		Description("test panic inside cmdr actions", "").
-		Group("Test")
-
-	val := 9
-	zeroVal := zero
-
-	pa.NewSubCommand("division-by-zero", "dz").
-		Description("").
-		Group("Test").
-		Action(func(cmd *cmdr.Command, args []string) (err error) {
-			fmt.Println(val / zeroVal)
-			return
-		})
-
-	pa.NewSubCommand("panic", "pa").
-		Description("").
-		Group("Test").
-		Action(func(cmd *cmdr.Command, args []string) (err error) {
-			panic(9)
-			return
-		})
 }
 
 const (

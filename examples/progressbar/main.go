@@ -34,7 +34,7 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 	rootCmd = root.RootCommand()
 
 	pBar(root)
-	panicTest(root)
+	cmdrPanic(root)
 
 	return
 }
@@ -42,11 +42,12 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 func pBar(root cmdr.OptCmd) {
 	// progressBar
 
-	root.NewSubCommand("progress-bar", "p", "pb").
+	cmdr.NewSubCmd().Titles("progress-bar", "p", "pb").
 		Description("progress bar test").
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
-		Action(pBar2)
+		Action(pBar2).
+		AttachTo(root)
 }
 
 func pBar1(cmd *cmdr.Command, args []string) (err error) {
@@ -129,31 +130,38 @@ func pBar2(cmd *cmdr.Command, args []string) (err error) {
 	return
 }
 
-func panicTest(root cmdr.OptCmd) {
+func cmdrPanic(root cmdr.OptCmd) {
 	// panic test
 
-	pa := root.NewSubCommand("panic-test", "pa").
+	pa := cmdr.NewSubCmd().
+		Titles("panic-test", "pa").
 		Description("test panic inside cmdr actions", "").
-		Group("Test")
+		Group("Test").
+		AttachTo(root)
 
 	val := 9
 	zeroVal := zero
 
-	pa.NewSubCommand("division-by-zero", "dz").
+	cmdr.NewSubCmd().
+		Titles("division-by-zero", "dz").
 		Description("").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			fmt.Println(val / zeroVal)
 			return
-		})
+		}).
+		AttachTo(pa)
 
-	pa.NewSubCommand("panic", "pa").
+	cmdr.NewSubCmd().
+		Titles("panic", "pa").
 		Description("").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
 			panic(9)
 			return
-		})
+		}).
+		AttachTo(pa)
+
 }
 
 const (

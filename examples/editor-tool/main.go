@@ -54,7 +54,7 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 func mx(root cmdr.OptCmd) {
 	// mx-test
 
-	mx := root.NewSubCommand("mx-test", "mx").
+	mx := cmdr.NewSubCmd().Titles("mx-test", "mx").
 		Description("test new features", "test new features,\nverbose long descriptions here.").
 		Group("Test").
 		Action(func(cmd *cmdr.Command, args []string) (err error) {
@@ -106,7 +106,8 @@ func mx(root cmdr.OptCmd) {
 				fmt.Println()
 			}
 			return
-		})
+		}).
+		AttachTo(root)
 
 	cmdr.NewString().Titles("test", "t").
 		Description("the test text.", "").

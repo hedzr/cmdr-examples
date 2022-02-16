@@ -7,9 +7,9 @@ import "github.com/hedzr/cmdr"
 func addFlags(root cmdr.OptCmd) {
 	// tags sub-commands
 
-	parent := root.NewSubCommand("flags", "f").
+	parent := cmdr.NewSubCmd().Titles("flags", "f").
 		Description("flags demo", "").
-		Group("")
+		Group("").AttachTo(root)
 
 	cmdr.NewBool(false).
 		Titles("bool", "b").
