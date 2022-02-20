@@ -12,7 +12,7 @@ import (
 
 func main() {
 	if err := cmdr.Exec(buildRootCmd(),
-		cmdr.WithLogx(log.NewStdLogger()),
+		cmdr.WithLogx(log.GetLogger()),
 	); err != nil {
 		cmdr.Logger.Printf("error: %+v\n", err)
 	}
