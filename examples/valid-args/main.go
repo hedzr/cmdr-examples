@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/hedzr/cmdr"
 	cmdrexamples "github.com/hedzr/cmdr-examples"
-	"gopkg.in/hedzr/errors.v2"
+	"gopkg.in/hedzr/errors.v3"
 )
 
 func main() {

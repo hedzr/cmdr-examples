@@ -8,7 +8,7 @@ import (
 	cmdr_examples "github.com/hedzr/cmdr-examples"
 	"github.com/hedzr/cmdr/tool"
 	"github.com/hedzr/logex/logx/logrus"
-	"gopkg.in/hedzr/errors.v2"
+	"gopkg.in/hedzr/errors.v3"
 )
 
 func main() {

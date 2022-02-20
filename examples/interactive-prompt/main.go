@@ -7,7 +7,7 @@ import (
 	"github.com/hedzr/cmdr"
 	cmdrexamples "github.com/hedzr/cmdr-examples"
 	"gopkg.in/AlecAivazis/survey.v1"
-	"gopkg.in/hedzr/errors.v2"
+	"gopkg.in/hedzr/errors.v3"
 )
 
 func main() {
