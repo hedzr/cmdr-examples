@@ -16,19 +16,19 @@ go 1.17
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.10.27
-	github.com/hedzr/cmdr-addons v1.10.27
-	github.com/hedzr/log v1.5.26
-	github.com/hedzr/logex v1.5.26
+	github.com/hedzr/cmdr v1.10.29
+	github.com/hedzr/cmdr-addons v1.10.29
+	github.com/hedzr/log v1.5.29
+	github.com/hedzr/logex v1.5.29
 	github.com/kardianos/service v1.2.1
 	github.com/nsf/termbox-go v1.1.1
 	github.com/sirupsen/logrus v1.8.1
 	github.com/superhawk610/bar v0.0.2
 	github.com/ttacon/chalk v0.0.0-20160626202418-22c06c80ed31
 	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
-	golang.org/x/sys v0.0.0-20220209214540-3681064d5158
+	golang.org/x/sys v0.0.0-20220227234510-4e6760a101f9
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
-	gopkg.in/hedzr/errors.v3 v3.0.3
+	gopkg.in/hedzr/errors.v3 v3.0.10
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -50,7 +50,7 @@ require (
 	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
 	github.com/kr/pretty v0.2.1 // indirect
 	github.com/labstack/echo-contrib v0.12.0 // indirect
-	github.com/labstack/echo/v4 v4.6.3 // indirect
+	github.com/labstack/echo/v4 v4.7.0 // indirect
 	github.com/labstack/gommon v0.3.1 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.11 // indirect
@@ -73,8 +73,8 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect
-	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd // indirect
-	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
+	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
+	golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20201208040808-7e3f01d25324 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
