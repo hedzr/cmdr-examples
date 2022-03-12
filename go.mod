@@ -16,10 +16,10 @@ go 1.17
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.10.30
-	github.com/hedzr/cmdr-addons v1.10.30
-	github.com/hedzr/log v1.5.30
-	github.com/hedzr/logex v1.5.30
+	github.com/hedzr/cmdr v1.10.31
+	github.com/hedzr/cmdr-addons v1.10.31
+	github.com/hedzr/log v1.5.31
+	github.com/hedzr/logex v1.5.31
 	github.com/kardianos/service v1.2.1
 	github.com/nsf/termbox-go v1.1.1
 	github.com/sirupsen/logrus v1.8.1
@@ -64,6 +64,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pkg/term v1.2.0-beta.2 // indirect
+	github.com/rs/zerolog v1.26.1 // indirect
 	github.com/superhawk610/terminal v0.1.0 // indirect
 	github.com/uber/jaeger-client-go v2.30.0+incompatible // indirect
 	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
