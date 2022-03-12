@@ -10,9 +10,9 @@ package main
 
 //import "github.com/hedzr/cmdr-examples/cmdr-gen/exam/cli"
 //
-//func main() {
-//	cli.Entry()
-//}
+func main() {
+	//	cli.Entry()
+}
 
 type Status int
 
