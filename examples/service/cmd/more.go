@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"github.com/hedzr/cmdr"
 	"github.com/hedzr/cmdr/tool"
+	"github.com/hedzr/log/dir"
 	"golang.org/x/crypto/ssh/terminal"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -35,7 +35,7 @@ func cmdrMoreCommandsForTest(root cmdr.OptCmd) {
 	cmdrMultiLevelTest(root)
 	cmdrManyCommandsTest(root)
 
-	//pprof.AttachToCmdr(root.RootCmdOpt())
+	// pprof.AttachToCmdr(root.RootCmdOpt())
 }
 
 func tgCommand(root cmdr.OptCmd) {
@@ -53,10 +53,10 @@ func tgCommand(root cmdr.OptCmd) {
 			fmt.Printf("> STDIN MODE: %v \n", cmdr.GetBoolR("mx-test.stdin"))
 			fmt.Println()
 
-			//logrus.Debug("debug")
-			//logrus.Info("debug")
-			//logrus.Warning("debug")
-			//logrus.WithField(logex.SKIP, 1).Warningf("dsdsdsds")
+			// logrus.Debug("debug")
+			// logrus.Info("debug")
+			// logrus.Warning("debug")
+			// logrus.WithField(logex.SKIP, 1).Warningf("dsdsdsds")
 
 			return
 		}).
@@ -142,15 +142,15 @@ func mxCommand(root cmdr.OptCmd) {
 			fmt.Printf("> STDIN MODE: %v \n", cmdr.GetBoolR("mx-test.stdin"))
 			fmt.Println()
 
-			//logrus.Debug("debug")
-			//logrus.Info("debug")
-			//logrus.Warning("debug")
-			//logrus.WithField(logex.SKIP, 1).Warningf("dsdsdsds")
+			// logrus.Debug("debug")
+			// logrus.Info("debug")
+			// logrus.Warning("debug")
+			// logrus.WithField(logex.SKIP, 1).Warningf("dsdsdsds")
 
 			if cmdr.GetBoolR("mx-test.stdin") {
 				fmt.Println("> Type your contents here, press Ctrl-D to end it:")
 				var data []byte
-				data, err = ioutil.ReadAll(os.Stdin)
+				data, err = dir.ReadAll(os.Stdin)
 				if err != nil {
 					cmdr.Logger.Printf("error: %+v", err)
 					return
@@ -360,11 +360,11 @@ func cmdrMultiLevelTest(root cmdr.OptCmd) {
 		Titles("mls", "mls").
 		Description("multi-level subcommands test").
 		Group("Test").
-		//Sets(func(cmd cmdr.OptCmd) {
+		// Sets(func(cmd cmdr.OptCmd) {
 		//	cmdrAddFlags(cmd)
-		//}).
+		// }).
 		AttachTo(root)
-	//cmd := root.NewSubCommand("mls", "mls").
+	// cmd := root.NewSubCommand("mls", "mls").
 	//	Description("multi-level subcommands test").
 	//	Group("Test")
 	cmdrAddFlags(cmd)
@@ -388,7 +388,7 @@ func cmdrMultiLevel(parent cmdr.OptCmd, depth int) {
 
 		cc := cmdr.NewSubCmd().
 			Titles(t, fmt.Sprintf("sc%v", i)).
-			//cc := parent.NewSubCommand(t, fmt.Sprintf("sc%v", i)).
+			// cc := parent.NewSubCommand(t, fmt.Sprintf("sc%v", i)).
 			Description(fmt.Sprintf("subcommands %v.sc%v test", ttl, i)).
 			Group("Test").
 			AttachTo(parent)

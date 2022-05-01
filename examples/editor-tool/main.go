@@ -7,8 +7,8 @@ import (
 	"github.com/hedzr/cmdr"
 	cmdrexamples "github.com/hedzr/cmdr-examples"
 	"github.com/hedzr/cmdr/tool"
+	"github.com/hedzr/log/dir"
 	"gopkg.in/hedzr/errors.v3"
-	"io/ioutil"
 	"log"
 	"os"
 )
@@ -88,15 +88,15 @@ func mx(root cmdr.OptCmd) {
 			fmt.Printf("> STDIN MODE: %v \n", cmdr.GetBoolR("mx-test.stdin"))
 			fmt.Println()
 
-			//logrus.Debug("debug")
-			//logrus.Info("debug")
-			//logrus.Warning("debug")
-			//logrus.WithField(logex.SKIP, 1).Warningf("dsdsdsds")
+			// logrus.Debug("debug")
+			// logrus.Info("debug")
+			// logrus.Warning("debug")
+			// logrus.WithField(logex.SKIP, 1).Warningf("dsdsdsds")
 
 			if cmdr.GetBoolR("mx-test.stdin") {
 				fmt.Println("> Type your contents here, press Ctrl-D to end it:")
 				var data []byte
-				data, err = ioutil.ReadAll(os.Stdin)
+				data, err = dir.ReadAll(os.Stdin)
 				if err != nil {
 					log.Printf("error: %+v", err)
 					return
