@@ -4,8 +4,8 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/hedzr/cmdr"
-	cmdrexamples "github.com/hedzr/cmdr-examples"
 	"github.com/hedzr/cmdr/tool"
 	"github.com/hedzr/log"
 )
@@ -13,14 +13,17 @@ import (
 func main() {
 	if err := cmdr.Exec(buildRootCmd(),
 		cmdr.WithLogx(log.GetLogger()),
+		// cmdr.WithLogx(build.New(cmdr.NewLoggerConfigWith(true, "logrus", "debug"))),
+		// cmdr.WithLogxShort(true, "logrus", "debug"),
 	); err != nil {
-		cmdr.Logger.Printf("error: %+v\n", err)
+		// cmdr.Logger.Printf("error: %+v\n", err)
+		log.Errorf("error: %+v\n", err)
 	}
 }
 
 func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 	root := cmdr.
-		Root(appName, cmdrexamples.Version).
+		Root(appName, cmdr.Version).
 		Copyright(copyright, "hedzr").
 		Description(desc, longDesc).
 		Examples(examples)
@@ -30,7 +33,8 @@ func buildRootCmd() (rootCmd *cmdr.RootCommand) {
 }
 
 func soundex(root cmdr.OptCmd) {
-	cmdr.NewSubCmd().Titles("soundex", "snd", "sndx", "sound").
+	cmdr.NewSubCmd().
+		Titles("soundex", "snd", "sndx", "sound").
 		Description("soundex test").
 		Group("Test").
 		TailPlaceholder("[text1, text2, ...]").
@@ -39,7 +43,8 @@ func soundex(root cmdr.OptCmd) {
 				fmt.Printf("%5d. %s => %s\n", ix, s, tool.Soundex(s))
 			}
 			return
-		}).AttachTo(root)
+		}).
+		AttachTo(root)
 }
 
 const (
