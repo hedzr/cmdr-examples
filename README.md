@@ -8,6 +8,12 @@ see also [`cmdr`](https://github.com/hedzr/cmdr), [`cmdr-addons`](https://github
 ## Status
 
 
+### v1.11.6 and newer
+
+golang 1.17+ required.
+
+> Since Go Modules 1.17 can't compatible with lower versions.
+
 ### v1.9.9 and newer
 
 golang 1.16+ required.
