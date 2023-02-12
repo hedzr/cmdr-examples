@@ -16,19 +16,19 @@ go 1.17
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.11.6
-	github.com/hedzr/cmdr-addons v1.11.6
-	github.com/hedzr/log v1.5.57
-	github.com/hedzr/logex v1.5.57
+	github.com/hedzr/cmdr v1.11.8
+	github.com/hedzr/cmdr-addons v1.11.8
+	github.com/hedzr/log v1.6.0
+	github.com/hedzr/logex v1.6.0
 	github.com/kardianos/service v1.2.2
 	github.com/nsf/termbox-go v1.1.1
 	github.com/sirupsen/logrus v1.9.0
 	github.com/superhawk610/bar v0.0.2
 	github.com/ttacon/chalk v0.0.0-20160626202418-22c06c80ed31
-	golang.org/x/crypto v0.5.0
-	golang.org/x/sys v0.4.0
+	golang.org/x/crypto v0.6.0
+	golang.org/x/sys v0.5.0
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
-	gopkg.in/hedzr/errors.v3 v3.0.23
+	gopkg.in/hedzr/errors.v3 v3.1.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -44,8 +44,8 @@ require (
 	github.com/goccy/go-json v0.9.11 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
-	github.com/hedzr/cmdr-base v0.1.3 // indirect
-	github.com/hedzr/evendeep v0.2.56 // indirect
+	github.com/hedzr/cmdr-base v1.0.0 // indirect
+	github.com/hedzr/evendeep v0.3.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
@@ -65,7 +65,6 @@ require (
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pkg/term v1.2.0-beta.2 // indirect
-	github.com/rs/zerolog v1.26.1 // indirect
 	github.com/superhawk610/terminal v0.1.0 // indirect
 	github.com/uber/jaeger-client-go v2.30.0+incompatible // indirect
 	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
@@ -73,13 +72,10 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	go.uber.org/multierr v1.6.0 // indirect
-	go.uber.org/zap v1.21.0 // indirect
-	golang.org/x/net v0.5.0 // indirect
-	golang.org/x/term v0.4.0 // indirect
-	golang.org/x/text v0.6.0 // indirect
+	golang.org/x/net v0.6.0 // indirect
+	golang.org/x/term v0.5.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	golang.org/x/time v0.2.0 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
