@@ -5,13 +5,16 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/hedzr/cmdr"
-	"github.com/hedzr/cmdr/tool"
-	"github.com/hedzr/log/dir"
-	"golang.org/x/crypto/ssh/terminal"
 	"os"
 	"os/exec"
 	"strings"
+
+	"golang.org/x/crypto/ssh/terminal"
+
+	"github.com/hedzr/cmdr"
+	"github.com/hedzr/cmdr/tool"
+	"github.com/hedzr/log/detects"
+	"github.com/hedzr/log/dir"
 )
 
 func cmdrMoreCommandsForTest(root cmdr.OptCmd) {
@@ -317,7 +320,7 @@ func cmdrTtySize(root cmdr.OptCmd) {
 			fmt.Printf(" 1. cols = %v, rows = %v\n\n", cols, rows)
 
 			cols, rows, err = terminal.GetSize(int(os.Stdout.Fd()))
-			fmt.Printf(" 2. cols = %v, rows = %v | in-docker: %v\n\n", cols, rows, cmdr.InDockerEnv())
+			fmt.Printf(" 2. cols = %v, rows = %v | in-docker: %v\n\n", cols, rows, detects.InDocker())
 
 			var out []byte
 			cc := exec.Command("stty", "size")
@@ -326,7 +329,7 @@ func cmdrTtySize(root cmdr.OptCmd) {
 			fmt.Printf(" 3. out: %v", string(out))
 			fmt.Printf("    err: %v\n", err)
 
-			if cmdr.InDockerEnv() {
+			if detects.InDocker() {
 				//
 			}
 			return
