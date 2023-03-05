@@ -4,10 +4,10 @@ go 1.17
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.11.11
-	github.com/hedzr/cmdr-addons v1.11.11
-	github.com/hedzr/log v1.6.7
-	github.com/hedzr/logex v1.6.7
+	github.com/hedzr/cmdr v1.11.13
+	github.com/hedzr/cmdr-addons v1.11.13
+	github.com/hedzr/log v1.6.9
+	github.com/hedzr/logex v1.6.9
 	github.com/kardianos/service v1.2.2
 	github.com/nsf/termbox-go v1.1.1
 	github.com/sirupsen/logrus v1.9.0
@@ -35,7 +35,7 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/hedzr/cmdr-base v1.0.0 // indirect
-	github.com/hedzr/evendeep v0.4.1 // indirect
+	github.com/hedzr/evendeep v0.4.3 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
