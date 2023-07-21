@@ -1,0 +1,166 @@
+app:
+  bgo:
+    build:
+      os: [darwin]
+      arch: [amd64]
+      projects:
+        000-default-group:
+          items:
+            actions:
+              name: actions
+              dir: examples/actions
+              package: github.com/hedzr/cmdr-examples/examples/actions
+              os: [darwin]
+              arch: [amd64]
+            cmdr-gen:
+              name: cmdr-gen
+              dir: cmdr-gen
+              package: github.com/hedzr/cmdr-examples/cmdr-gen
+              os: [darwin]
+              arch: [amd64]
+            configfile:
+              name: configfile
+              dir: examples/configfile
+              package: github.com/hedzr/cmdr-examples/examples/configfile
+              os: [darwin]
+              arch: [amd64]
+            editor-tool:
+              name: editor-tool
+              dir: examples/editor-tool
+              package: github.com/hedzr/cmdr-examples/examples/editor-tool
+              os: [darwin]
+              arch: [amd64]
+            envvars:
+              name: envvars
+              dir: examples/envvars
+              package: github.com/hedzr/cmdr-examples/examples/envvars
+              os: [darwin]
+              arch: [amd64]
+            exam:
+              name: exam
+              dir: cmdr-gen/exam
+              package: github.com/hedzr/cmdr-examples/cmdr-gen/exam
+              os: [darwin]
+              arch: [amd64]
+            flags:
+              name: flags
+              dir: examples/flags
+              package: github.com/hedzr/cmdr-examples/examples/flags
+              os: [darwin]
+              arch: [amd64]
+            getting-start:
+              name: getting-start
+              dir: examples/getting-start
+              package: github.com/hedzr/cmdr-examples/examples/getting-start
+              os: [darwin]
+              arch: [amd64]
+            golang-style:
+              name: golang-style
+              dir: examples/golang-style
+              package: github.com/hedzr/cmdr-examples/examples/golang-style
+              os: [darwin]
+              arch: [amd64]
+            head-like:
+              name: head-like
+              dir: examples/head-like
+              package: github.com/hedzr/cmdr-examples/examples/head-like
+              os: [darwin]
+              arch: [amd64]
+            interactive-prompt:
+              name: interactive-prompt
+              dir: examples/interactive-prompt
+              package: github.com/hedzr/cmdr-examples/examples/interactive-prompt
+              os: [darwin]
+              arch: [amd64]
+            kilo-bytes:
+              name: kilo-bytes
+              dir: examples/kilo-bytes
+              package: github.com/hedzr/cmdr-examples/examples/kilo-bytes
+              os: [darwin]
+              arch: [amd64]
+            logging:
+              name: logging
+              dir: examples/logging
+              package: github.com/hedzr/cmdr-examples/examples/logging
+              os: [darwin]
+              arch: [amd64]
+            non-cmdr:
+              name: non-cmdr
+              dir: internal/others/non-cmdr
+              package: github.com/hedzr/cmdr-examples/internal/others/non-cmdr
+              os: [darwin]
+              arch: [amd64]
+            panics:
+              name: panics
+              dir: examples/panics
+              package: github.com/hedzr/cmdr-examples/examples/panics
+              os: [darwin]
+              arch: [amd64]
+            progressbar:
+              name: progressbar
+              dir: examples/progressbar
+              package: github.com/hedzr/cmdr-examples/examples/progressbar
+              os: [darwin]
+              arch: [amd64]
+            service:
+              name: service
+              dir: examples/service
+              package: github.com/hedzr/cmdr-examples/examples/service
+              os: [darwin]
+              arch: [amd64]
+            shell-mode:
+              name: shell-mode
+              dir: examples/shell-mode
+              package: github.com/hedzr/cmdr-examples/examples/shell-mode
+              os: [darwin]
+              arch: [amd64]
+            simple:
+              name: simple
+              dir: examples/simple
+              package: github.com/hedzr/cmdr-examples/examples/simple
+              os: [darwin]
+              arch: [amd64]
+            subcommands:
+              name: subcommands
+              dir: examples/subcommands
+              package: github.com/hedzr/cmdr-examples/examples/subcommands
+              os: [darwin]
+              arch: [amd64]
+            toggle-group:
+              name: toggle-group
+              dir: examples/toggle-group
+              package: github.com/hedzr/cmdr-examples/examples/toggle-group
+              os: [darwin]
+              arch: [amd64]
+            tui-demo:
+              name: tui-demo
+              dir: examples/tui-demo
+              package: github.com/hedzr/cmdr-examples/examples/tui-demo
+              os: [darwin]
+              arch: [amd64]
+            valid-args:
+              name: valid-args
+              dir: examples/valid-args
+              package: github.com/hedzr/cmdr-examples/examples/valid-args
+              os: [darwin]
+              arch: [amd64]
+            wget-cover:
+              name: wget-cover
+              dir: examples/wget-cover
+              package: github.com/hedzr/cmdr-examples/examples/wget-cover
+              os: [darwin]
+              arch: [amd64]
+            winsvc:
+              name: winsvc
+              dir: internal/others/winsvc
+              package: github.com/hedzr/cmdr-examples/internal/others/winsvc
+              os: [darwin]
+              arch: [amd64]
+          os: [darwin]
+          arch: [amd64]
+      output:
+        dir: ./bin
+        named-as: '{{.AppName}}-{{.OS}}-{{.ARCH}}'
+      excludes: [study*, test*]
+
+
