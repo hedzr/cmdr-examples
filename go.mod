@@ -4,10 +4,10 @@ go 1.20
 
 require (
 	github.com/gizak/termui/v3 v3.1.0
-	github.com/hedzr/cmdr v1.11.20
+	github.com/hedzr/cmdr v1.11.21
 	github.com/hedzr/cmdr-addons v1.11.20
-	github.com/hedzr/log v1.6.18
-	github.com/hedzr/logex v1.6.19
+	github.com/hedzr/log v1.6.21
+	github.com/hedzr/logex v1.6.21
 	github.com/kardianos/service v1.2.2
 	github.com/nsf/termbox-go v1.1.1
 	github.com/sirupsen/logrus v1.9.3
@@ -16,7 +16,7 @@ require (
 	golang.org/x/crypto v0.14.0
 	golang.org/x/sys v0.13.0
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
-	gopkg.in/hedzr/errors.v3 v3.1.6
+	gopkg.in/hedzr/errors.v3 v3.1.9
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -37,7 +37,7 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/hedzr/cmdr-base v1.0.0 // indirect
-	github.com/hedzr/evendeep v0.4.8 // indirect
+	github.com/hedzr/evendeep v0.4.13 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
@@ -72,6 +72,7 @@ require (
 	golang.org/x/term v0.13.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
